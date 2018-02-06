@@ -26,6 +26,7 @@ public class ChatClientProject extends Application {
         stage.setScene(scene);
         stage.show();
         //hesham
+        //gggggggggggggg
     }
 
     /**
