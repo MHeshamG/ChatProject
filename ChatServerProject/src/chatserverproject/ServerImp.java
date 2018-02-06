@@ -6,11 +6,16 @@
 package chatserverproject;
 
 import chatprojectcommon.ServerInterface;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  *
  * @author mohamed hesham
  */
-public class ServerImp implements ServerInterface{
+public class ServerImp extends UnicastRemoteObject implements ServerInterface{
     
+    public ServerImp()throws RemoteException{
+    
+    }
 }
