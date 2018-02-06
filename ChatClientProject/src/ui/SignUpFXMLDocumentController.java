@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chatclientproject;
+package ui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,7 +16,7 @@ import javafx.scene.control.Label;
  *
  * @author mohamed hesham
  */
-public class FXMLDocumentController implements Initializable {
+public class SignUpFXMLDocumentController implements Initializable {
     
     @FXML
     private Label label;
