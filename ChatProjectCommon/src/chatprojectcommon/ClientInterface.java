@@ -9,6 +9,6 @@ package chatprojectcommon;
  *
  * @author mohamed hesham
  */
-public class ClientInterface {
+public interface ClientInterface {
     
 }
