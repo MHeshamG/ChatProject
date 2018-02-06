@@ -27,7 +27,7 @@ public class ChatClientProject extends Application {
         stage.show();
         //hesham
         //gggggggggggggg
-        System.out.println("hhhhhhghghghghghghgh");
+        System.out.println("ggsgsgsgsg");
     }
 
     /**
