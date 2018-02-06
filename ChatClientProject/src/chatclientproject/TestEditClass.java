@@ -9,6 +9,6 @@ package chatclientproject;
  *
  * @author mohamed hesham
  */
-public class TestClass {
+public class TestEditClass {
     ///fsdfsdfsd
 }
