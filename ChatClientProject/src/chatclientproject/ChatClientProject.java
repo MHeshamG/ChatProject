@@ -19,15 +19,12 @@ public class ChatClientProject extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/ui/SignInFXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
         stage.show();
-        //hesham
-        //gggggggggggggg
-        System.out.println("ggsgsgsgsg");
     }
 
     /**
