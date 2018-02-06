@@ -5,10 +5,12 @@
  */
 package chatprojectcommon;
 
+import java.rmi.Remote;
+
 /**
  *
  * @author mohamed hesham
  */
-public interface ClientInterface {
+public interface ClientInterface extends Remote{
     
 }
