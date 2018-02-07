@@ -19,7 +19,7 @@ public class ChatServerProject extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/ui/FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
         
@@ -31,6 +31,7 @@ public class ChatServerProject extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        MainControllerServer.getInstance().bindService();
         launch(args);
     }
     

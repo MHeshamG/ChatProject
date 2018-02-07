@@ -15,7 +15,7 @@ public class UserTableOperations {
     
     private UserTableOperations userTableOperationsObj;
     
-    public UserTableOperations getInstance(){
+    public static UserTableOperations getInstance(){
     
         return null;
     }
