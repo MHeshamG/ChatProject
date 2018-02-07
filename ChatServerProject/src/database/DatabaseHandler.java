@@ -5,10 +5,49 @@
  */
 package database;
 
-/**
- *
- * @author mohamed hesham
- */
-public class DatabaseHandler {
+import java.sql.*;
+public class DatabaseHandler 
+{    
+    
+    private static DatabaseHandler databaseHandlerObj;
+    private DatabaseHandler(){};
+    
+    public static DatabaseHandler  getInstance()
+    {
+    
+        databaseHandlerObj=new DatabaseHandler();
+        return databaseHandlerObj;
+          
+    }
+    
+    
+    public void insert(String query)
+    {
+    
+          
+    
+    }
+    
+    public void update (String query)
+    {
+      
+           
+        
+    }
+    
+      public void delete  (String query)
+    {
+    
+            
+    }
+    
+         public  void  select(String query) 
+    {
+    
+       
+        
+                
+                
+    }
     
 }
