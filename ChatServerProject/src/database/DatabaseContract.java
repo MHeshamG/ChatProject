@@ -12,7 +12,7 @@ package database;
 public class DatabaseContract {
     
     
-    public static class User{
+    public static class UserTableContract{
     
         public static String tableName="user";
         public static String id="id";

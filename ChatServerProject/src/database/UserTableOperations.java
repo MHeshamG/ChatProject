@@ -5,10 +5,27 @@
  */
 package database;
 
+import chatprojectcommon.User;
+
 /**
  *
  * @author mohamed hesham
  */
 public class UserTableOperations {
     
+    private UserTableOperations userTableOperationsObj;
+    
+    public UserTableOperations getInstance(){
+    
+        return null;
+    }
+    
+    public void insertUser(User user){
+    
+    }
+    
+    public boolean selectUser(String email,String password){
+    
+        return false;
+    }
 }
