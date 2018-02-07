@@ -5,11 +5,13 @@
  */
 package chatprojectcommon;
 
+import java.io.Serializable;
+
 /**
  *
  * @author mohamed hesham
  */
-public class User {
+public class User implements Serializable{
     private  String name;
     private  String userName;
     private  String gender;
