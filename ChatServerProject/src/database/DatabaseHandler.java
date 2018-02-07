@@ -12,12 +12,13 @@ public class DatabaseHandler
 {    
     
     private static DatabaseHandler databaseHandlerObj;
+    
     private DatabaseHandler(){
     
        connect();
     
     };
-    
+   
       Connection con=null;
       Statement stmt;
     
@@ -32,8 +33,6 @@ public class DatabaseHandler
     
     public Connection connect()
     {
-        
-       
           
         try{
               Class.forName("com.mysql.jdbc.Driver");
