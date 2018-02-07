@@ -19,7 +19,7 @@ public class DatabaseHandler
     
     };
    
-      Connection con=null;
+    
       Statement stmt;
     
     public static DatabaseHandler  getInstance()
@@ -31,9 +31,9 @@ public class DatabaseHandler
     }
     
     
-    public Connection connect()
+    public void connect()
     {
-          
+           Connection con=null; 
         try{
               Class.forName("com.mysql.jdbc.Driver");
               con =DriverManager.getConnection(  
@@ -54,7 +54,7 @@ public class DatabaseHandler
          ex.printStackTrace();
     }  
         
-    return con;
+   
     }
     
     
