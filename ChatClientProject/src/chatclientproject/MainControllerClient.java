@@ -5,6 +5,8 @@
  */
 package chatclientproject;
 
+import chatprojectcommon.User;
+
 /**
  *
  * @author mohamed hesham
@@ -28,6 +30,11 @@ public class MainControllerClient {
     public boolean login(String email,String password){
         //TODO call login method at server
         System.out.println(email+" "+password);
+        return false;
+    }
+    public boolean signUp(User user){
+        // call signup method at server
+        //System.out.println();
         return false;
     }
 }
