@@ -43,7 +43,7 @@ public class MainControllerServer {
     }
     
     public void signup(User user){
-        //UserTableOperations.getInstance().insertUser(user);
+        UserTableOperations.getInstance().insertUser(user);
         System.out.println(user.getEmail());
     }
     

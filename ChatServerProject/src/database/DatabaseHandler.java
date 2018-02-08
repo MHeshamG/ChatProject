@@ -38,7 +38,7 @@ public class DatabaseHandler
            Connection con=null; 
         try{
               Class.forName("com.mysql.jdbc.Driver");
-              con =DriverManager.getConnection("jdbc:mysql://localhost:3306/chatdatabase","root","root");
+              con =DriverManager.getConnection("jdbc:mysql://localhost:3306/jsp","root","");
               
               stmt =con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
         

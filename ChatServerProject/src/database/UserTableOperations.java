@@ -13,11 +13,14 @@ import chatprojectcommon.User;
  */
 public class UserTableOperations {
 
-    private UserTableOperations userTableOperationsObj;
+    private static UserTableOperations userTableOperationsObj;
 
     public static UserTableOperations getInstance() {
 
-        return null;
+        if(userTableOperationsObj==null)
+            userTableOperationsObj=new UserTableOperations();
+        
+        return userTableOperationsObj;
     }
 
     public void insertUser(User user) {
