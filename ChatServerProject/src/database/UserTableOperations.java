@@ -12,20 +12,33 @@ import chatprojectcommon.User;
  * @author mohamed hesham
  */
 public class UserTableOperations {
-    
+
     private UserTableOperations userTableOperationsObj;
-    
-    public static UserTableOperations getInstance(){
-    
+
+    public static UserTableOperations getInstance() {
+
         return null;
     }
-    
-    public void insertUser(User user){
-    
+
+    public void insertUser(User user) {
+        String query;
+
+        query = "insert into " + DatabaseContract.UserTableContract.tableName + "(" + DatabaseContract.UserTableContract.userName
+                + "," + DatabaseContract.UserTableContract.name
+                + "," + DatabaseContract.UserTableContract.password
+                + "," + DatabaseContract.UserTableContract.email
+                + "," + DatabaseContract.UserTableContract.gender + ")"
+                + "values(" + user.getUserName()
+                + "," + user.getName()
+                + "," + user.getPassword()
+                + "," + user.getEmail()
+                + "," + user.getGender() + ")";
+
+        DatabaseHandler.getInstance().insert(query);
     }
-    
-    public boolean selectUser(String email,String password){
-    
+
+    public boolean selectUser(String email, String password) {
+
         return false;
     }
 }
