@@ -14,7 +14,7 @@ public class DatabaseContract {
     
     public static class UserTableContract{
     
-        public static String tableName="user";
+        public static String tableName="users";
         public static String id="id";
         public static String name="name";
         public static String userName="userName";
