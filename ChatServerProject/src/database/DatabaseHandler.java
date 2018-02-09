@@ -63,7 +63,7 @@ public class DatabaseHandler
     {
     
         try {
-            stmt.executeQuery(query);
+            stmt.executeUpdate(query);
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHandler.class.getName()).log(Level.SEVERE, null, ex);
         }

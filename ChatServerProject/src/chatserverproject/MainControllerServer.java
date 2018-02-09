@@ -44,10 +44,14 @@ public class MainControllerServer {
     
     public void signup(User user){
         UserTableOperations.getInstance().insertUser(user);
-        System.out.println(user.getEmail());
+        //System.out.println(user.getEmail());
     }
     
     public boolean login(String email,String password){
        return UserTableOperations.getInstance().selectUser(email,password);
+    }
+    
+    public void AddRequest(String senderEmail,String receiverEmail){
+    
     }
 }

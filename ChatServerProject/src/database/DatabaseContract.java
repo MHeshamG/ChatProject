@@ -17,7 +17,7 @@ public class DatabaseContract {
         public static String tableName="users";
         public static String id="id";
         public static String name="name";
-        public static String userName="userName";
+        public static String userName="username";
         public static String email="email";
         public static String password="password";
         public static String gender="gender";
