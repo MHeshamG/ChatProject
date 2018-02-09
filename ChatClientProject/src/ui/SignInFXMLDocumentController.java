@@ -56,7 +56,6 @@ public class SignInFXMLDocumentController implements Initializable {
                     Parent root = FXMLLoader.load(getClass().getResource("SignUpFXMLDocument.fxml"));
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
-                    stage.show();
                 } catch (IOException ex) {
                     Logger.getLogger(SignInFXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                 }

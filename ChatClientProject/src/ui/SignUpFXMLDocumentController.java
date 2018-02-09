@@ -17,7 +17,14 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import chatclientproject.MainControllerClient;
 import chatprojectcommon.User;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
 
 /**
  *
@@ -26,7 +33,7 @@ import javafx.scene.control.ToggleGroup;
 public class SignUpFXMLDocumentController implements Initializable {
     
    @FXML
-    private TextField name;
+   private TextField name;
    @FXML
    private TextField username;
    @FXML
@@ -76,7 +83,18 @@ public class SignUpFXMLDocumentController implements Initializable {
     }    
     private void createUser(User user){
         
-        MainControllerClient.getInstance().signUp(user);
+       // MainControllerClient.getInstance().signUp(user);
+       goToChatScene();
+    }
     
+    private void goToChatScene(){
+       try {
+           Stage stage = (Stage) name.getScene().getWindow();
+           Parent root = FXMLLoader.load(getClass().getResource("ChatUiFXMLDocument.fxml"));
+           Scene scene = new Scene(root,1500,800);
+           stage.setScene(scene);
+       } catch (IOException ex) {
+           Logger.getLogger(SignUpFXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+       }
     }
 }

@@ -12,6 +12,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,6 +24,7 @@ public class MainControllerClient {
     
     private static MainControllerClient mainControllerClient;
     private ServerInterface server;
+    private String email;// email of the user of the app
     
     private MainControllerClient(){
         
@@ -61,5 +63,36 @@ public class MainControllerClient {
             Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+    
+    /**
+     * connects to the server and send a friend requests on this email
+     * @param email email of the person here the add request will be sent to
+     */
+    public void sendRequest(String email){
+        //TODO call server sendRequest method
+    }
+    
+    /**
+     * function to get this user friends list from the server
+     * @param email of the user of the app 
+     * @return ArrayList of friends
+     */
+    public ArrayList<User> getFriendsList(){
+        //TODO call the server getFriendsList function
+        
+        //demo method
+        
+        
+        return demo();
+    }
+    
+    //testing method for friends list
+    private ArrayList<User> demo(){
+         ArrayList<User> users =new ArrayList<User>();
+        for(int i=0;i<10;i++){
+            users.add(new User("Mohamed"));
+        }
+        return users;
     }
 }

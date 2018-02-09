@@ -1,1 +1,60 @@
-/*css*/
+.list-view{
+   -fx-box-border:0;
+   -fx-background-color: #253241;
+}
+/*.list-view:focused{
+    -fx-box-border:0;
+    -fx-border-color: #253241;
+}*/
+.list-view .list-cell{
+    -fx-background-color:#253241;
+    /*-fx-border-width: 0 0 1 0;
+    -fx-border-color: #ffffff;*/
+}
+
+.list-view .list-cell:focused{
+    -fx-background-color:#6f14dd;
+}
+.list-view .list-cell:hover{
+    -fx-background-color:#4c6175;
+}
+.background{
+    -fx-background-image: url("/imgs/Artboard_2.png");
+}
+.jfx-tab-pane .headers-region { 
+    -fx-padding: 2px; 
+}
+.jfx-tab-pane .tab-header-background { 
+    -fx-background-color: #253241; 
+}
+
+.list-view .scroll-bar:vertical {
+    -fx-background-color: #253241;
+}
+
+.list-view .scroll-bar:vertical .increment-button ,
+.list-view .scroll-bar:vertical .decrement-button {
+
+    -fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 10 0 0;
+
+}
+
+.list-view .scroll-bar .increment-arrow,
+.list-view .scroll-bar .decrement-arrow
+ {
+	-fx-shape: " ";	
+	-fx-padding:2px;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.list-view .scroll-bar:vertical .thumb {
+    -fx-background-color:#4c6175;
+    -fx-background-insets: 0 2 0 2;
+    -fx-background-radius: 2em;
+}
+
+.jfx-tab-pane .tab-selected-line {
+    -fx-background-color: linear-gradient(to left ,#6407ea,#c14c91);
+}
