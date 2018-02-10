@@ -15,6 +15,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import notificationmanager.NotificationHandler;
 
 public class ChatUiFXMLDocumentController implements Initializable{
     
@@ -31,6 +32,9 @@ public class ChatUiFXMLDocumentController implements Initializable{
             
             //add listener to add friend text field
             handleAddFriendTextField();
+            
+            //test Notification
+            NotificationHandler.getInstance().shOwNewMessageNotification("hi there");
             
         /**************************************************/
 
