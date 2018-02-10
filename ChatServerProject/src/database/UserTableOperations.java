@@ -64,4 +64,45 @@ public class UserTableOperations {
         return checkIfExist;
 
     }
+    
+       public int emailToId(String email)
+    {
+    
+        try {
+            String query;
+            ResultSet rs;
+            
+            query="select " +  DatabaseContract.UserTableContract.id
+                    +" from "+  DatabaseContract.UserTableContract.tableName
+                    +" where "+ DatabaseContract.UserTableContract.email+"="+"'"+email+"'" ;
+            System.out.println(query);
+            
+            rs= DatabaseHandler.getInstance().select(query);
+            
+            while (rs.next()) {
+                  System.out.println(rs.getInt("id"));
+                 return (rs.getInt("id"));
+            
+
+            }
+             
+         
+        } catch (SQLException ex) {
+            Logger.getLogger(UserTableOperations.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+
+        
+            return -1;  
+}
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
