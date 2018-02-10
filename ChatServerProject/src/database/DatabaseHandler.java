@@ -108,6 +108,7 @@ public class DatabaseHandler
        
           try {
                  selectedData=stmt.executeQuery(query);
+                 
           } catch (SQLException ex) {
             Logger.getLogger(DatabaseHandler.class.getName()).log(Level.SEVERE, null, ex);
           }

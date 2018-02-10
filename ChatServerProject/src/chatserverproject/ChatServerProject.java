@@ -39,11 +39,12 @@ public class ChatServerProject extends Application {
      */
     public static void main(String[] args) {
         User user = new User("d", "f", "q", "f", "h");
-
+        
         MainControllerServer.getInstance().bindService();
 
-        UserTableOperations.getInstance().insertUser(user);
-        UserTableOperations.getInstance().selectUser("dddd", "");
+       // UserTableOperations.getInstance().insertUser(user);
+        UserTableOperations.getInstance().selectUser("f", "h");
+        
         launch(args);
     }
 
