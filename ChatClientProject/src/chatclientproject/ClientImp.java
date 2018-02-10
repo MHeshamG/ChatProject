@@ -15,7 +15,11 @@ import java.rmi.server.UnicastRemoteObject;
  */
 public class ClientImp extends UnicastRemoteObject implements ClientInterface{
     
-    public ClientImp()throws RemoteException{
+    String email;//email of this user
     
+    public ClientImp(String email)throws RemoteException{
+        this.email=email;
     }
+    
+    
 }
