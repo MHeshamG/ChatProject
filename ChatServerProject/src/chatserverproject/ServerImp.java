@@ -32,8 +32,9 @@ public class ServerImp extends UnicastRemoteObject implements ServerInterface{
     }
 
     @Override
-    public void sendRequest(String senderEmail,String receiverEmail) {
+    public boolean sendRequest(String senderEmail,String receiverEmail) {
         //TODO save request at database requests table
+        return false;
     }
 
     @Override
