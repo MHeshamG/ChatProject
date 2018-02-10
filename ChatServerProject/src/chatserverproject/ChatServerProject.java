@@ -5,7 +5,9 @@
  */
 package chatserverproject;
 
+import chatprojectcommon.User;
 import database.DatabaseHandler;
+import database.UserTableOperations;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -21,13 +23,13 @@ import javafx.stage.Stage;
  * @author mohamed hesham
  */
 public class ChatServerProject extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/ui/FXMLDocument.fxml"));
-        
+
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.show();
     }
@@ -36,8 +38,13 @@ public class ChatServerProject extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        User user = new User("d", "f", "q", "f", "h");
+
         MainControllerServer.getInstance().bindService();
+
+        UserTableOperations.getInstance().insertUser(user);
+        UserTableOperations.getInstance().selectUser("dddd", "");
         launch(args);
     }
-    
+
 }
