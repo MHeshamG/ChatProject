@@ -24,7 +24,7 @@
                                 <Image url="/imgs/add_freind_icon.png" />
                             </image>
                         </ImageView>
-                        <JFXTextField promptText="Add Friend" style="-fx-text-fill:#ffffff;" focusColor="#ffffff" layoutX="50.0" layoutY="0.0" prefHeight="30.0" prefWidth="400.0" >
+                        <JFXTextField fx:id="addFriendText" promptText="Add Friend" style="-fx-text-fill:#ffffff;" focusColor="#ffffff" layoutX="50.0" layoutY="0.0" prefHeight="30.0" prefWidth="400.0" >
                             <font>
                                 <Font size="24.0"/>
                             </font>

@@ -25,6 +25,14 @@ public class MainControllerClient {
     private static MainControllerClient mainControllerClient;
     private ServerInterface server;
     private String email;// email of the user of the app
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
     
     private MainControllerClient(){
         
@@ -69,8 +77,14 @@ public class MainControllerClient {
      * connects to the server and send a friend requests on this email
      * @param email email of the person here the add request will be sent to
      */
-    public void sendRequest(String email){
-        //TODO call server sendRequest method
+    public void sendRequest(String receiverEmail){
+        try {
+            //TODO call server sendRequest method
+            server.sendRequest(email, receiverEmail);
+        } catch (RemoteException ex) {
+            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(email);
     }
     
     /**
