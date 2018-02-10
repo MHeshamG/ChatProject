@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public interface ServerInterface extends Remote {
     public void signup(User user) throws RemoteException;
     public boolean login(String email,String password) throws RemoteException;
-    public void sendRequest(String senderEmail,String receiverEmail) throws RemoteException;
+    public boolean sendRequest(String senderEmail,String receiverEmail) throws RemoteException;
     public ArrayList<User> getRequestsList(String email)throws RemoteException;
     public ArrayList<User> getFriendsList(String email) throws RemoteException;
 }
