@@ -1,3 +1,4 @@
+/*left side*/
 .list-view{
    -fx-box-border:0;
    -fx-background-color: #253241;
@@ -28,12 +29,12 @@
     -fx-background-color: #253241; 
 }
 
-.list-view .scroll-bar:vertical {
-    -fx-background-color: #253241;
-}
 
 .list-view .scroll-bar:vertical .increment-button ,
-.list-view .scroll-bar:vertical .decrement-button {
+.list-view .scroll-bar:vertical .decrement-button ,
+.scroll-pane .scroll-bar:vertical .increment-button,
+.scroll-pane .scroll-bar:vertical .decrement-button
+{
 
     -fx-background-color:transparent;
     -fx-background-radius: 0em;
@@ -42,14 +43,17 @@
 }
 
 .list-view .scroll-bar .increment-arrow,
-.list-view .scroll-bar .decrement-arrow
+.list-view .scroll-bar .decrement-arrow,
+.scroll-pane .scroll-bar  .increment-arrow,
+.scroll-pane .scroll-bar .decrement-arrow
  {
 	-fx-shape: " ";	
 	-fx-padding:2px;
 }
 
-/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
-.list-view .scroll-bar:vertical .thumb {
+.list-view .scroll-bar:vertical .thumb,
+.scroll-pane .scroll-bar:vertical .thumb
+{
     -fx-background-color:#4c6175;
     -fx-background-insets: 0 2 0 2;
     -fx-background-radius: 2em;
@@ -57,4 +61,43 @@
 
 .jfx-tab-pane .tab-selected-line {
     -fx-background-color: linear-gradient(to left ,#6407ea,#c14c91);
+}
+/*****************************************************************************/
+
+/*right side*/
+
+/*scroll pane*/
+.scroll-pane > .viewport  { 
+    -fx-background-color: transparent; 
+}
+.scroll-pane{
+        -fx-border-color: #FFFFFF;
+        -fx-background-color: transparent; 
+        
+}
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color:#ffffff;
+}
+
+/*msg textfield*/
+.msg-text-field{
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color:#6407ea;
+}
+/*message*/
+.textFlowMessage
+{
+    -fx-background-color: #eeeeef; 
+    -fx-padding: 5px;
+    -fx-background-radius:0px 15px 15px 10px;
+}
+.textFlowMessageFlipped
+{
+    -fx-background-color: linear-gradient(to right ,#6407ea,#c14c91); 
+    -fx-padding: 5px;
+    -fx-background-radius:15px 0px 15px 15px;
+}
+.textWhite{
+    -fx-text-fill:#ffffff; 
+    -fx-fill:#ffffff;
 }

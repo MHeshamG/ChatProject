@@ -9,82 +9,179 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.effect.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" stylesheets="/css/styles.css" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ChatUiFXMLDocumentController">
-   <children>
-      <JFXTabPane layoutY="0.0" prefHeight="788.0" prefWidth="498.0" side="BOTTOM" tabClosingPolicy="ALL_TABS">
-         <tabs>
-            <Tab text="Friends">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" layoutY="0.0" prefHeight="788.0" prefWidth="498.0" style="-fx-background-color: #253241;">
-                     <children>
-                        <ListView fx:id="contactList" layoutY="60.0" prefHeight="690.0" prefWidth="498.0" />
-                        <ImageView fitHeight="50.0" fitWidth="65.0" layoutX="0.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="/imgs/add_freind_icon.png" />
-                            </image>
-                        </ImageView>
-                        <JFXTextField fx:id="addFriendText" promptText="Add Friend" style="-fx-text-fill:#ffffff;" focusColor="#ffffff" layoutX="50.0" layoutY="0.0" prefHeight="30.0" prefWidth="400.0" >
-                            <font>
-                                <Font size="24.0"/>
-                            </font>
-                            <unFocusColor>
-                                <LinearGradient endX="1.0" endY="1.0">
-                                   <stops>
-                                      <Stop color="#6407ea" offset="0.007246376811594203" />
-                                      <Stop color="#c14c91" offset="1.0" />
-                                   </stops>
-                                </LinearGradient>
-                             </unFocusColor>
-                        </JFXTextField> 
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-            <Tab text="Groups">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
-            </Tab>
-             <Tab text="Requests">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
-            </Tab>
-             <Tab text="Create Group">
-              <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" layoutY="0.0" prefHeight="788.0" prefWidth="498.0" style="-fx-background-color: #253241;" >
-                      <children>
-                          <Text text="G+" layoutX="5.0" layoutY="40.0" fill="#4c6175">
-                              <font>
-                                  <Font size="30.0"/>
-                              </font>
-                          </Text>
-                        <ListView fx:id="contactListCreateGroup" layoutY="60.0" prefHeight="690.0" prefWidth="498.0" />
-                        <JFXTextField fx:id="createGroupText" promptText="Group Name" style="-fx-text-fill:#ffffff;" focusColor="#ffffff" layoutX="50.0" layoutY="0.0" prefHeight="30.0" prefWidth="400.0" >
-                            <font>
-                                <Font size="24.0"/>
-                            </font>
-                            <unFocusColor>
-                                <LinearGradient endX="1.0" endY="1.0">
-                                   <stops>
-                                      <Stop color="#6407ea" offset="0.007246376811594203" />
-                                      <Stop color="#c14c91" offset="1.0" />
-                                   </stops>
-                                </LinearGradient>
-                             </unFocusColor>
-                        </JFXTextField> 
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-             <Tab text="Profile">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
-            </Tab>
-         </tabs>
-      </JFXTabPane>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" styleClass="background" stylesheets="/css/styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ChatUiFXMLDocumentController">
+    <children>
+        <JFXTabPane layoutY="0.0" prefHeight="788.0" prefWidth="498.0" side="BOTTOM" tabClosingPolicy="ALL_TABS">
+            <tabs>
+                <Tab text="Friends">
+                    <content>
+                        <AnchorPane layoutY="0.0" minHeight="0.0" minWidth="0.0" prefHeight="788.0" prefWidth="498.0" style="-fx-background-color: #253241;">
+                            <children>
+                                <ListView fx:id="contactList" layoutY="60.0" prefHeight="690.0" prefWidth="498.0" />
+                                <ImageView fitHeight="50.0" fitWidth="65.0" layoutX="0.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="/imgs/add_freind_icon.png" />
+                                    </image>
+                                </ImageView>
+                                <JFXTextField fx:id="addFriendText" focusColor="#ffffff" layoutX="50.0" layoutY="0.0" prefHeight="30.0" prefWidth="400.0" promptText="Add Friend" style="-fx-text-fill:#ffffff;">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                    <unFocusColor>
+                                        <LinearGradient endX="1.0" endY="1.0">
+                                            <stops>
+                                                <Stop color="#6407ea" offset="0.007246376811594203" />
+                                                <Stop color="#c14c91" offset="1.0" />
+                                            </stops>
+                                        </LinearGradient>
+                                    </unFocusColor>
+                                </JFXTextField> 
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Groups">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                </Tab>
+                <Tab text="Requests">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                </Tab>
+                <Tab text="Create Group">
+                    <content>
+                        <AnchorPane layoutY="0.0" minHeight="0.0" minWidth="0.0" prefHeight="788.0" prefWidth="498.0" style="-fx-background-color: #253241;">
+                            <children>
+                                <ListView fx:id="contactListCreateGroup" layoutY="60.0" prefHeight="690.0" prefWidth="498.0" />
+                                <JFXTextField fx:id="createGroupText" focusColor="#ffffff" layoutX="9.0" layoutY="0.0" prefHeight="51.0" prefWidth="480.0" promptText="Group Name" style="-fx-text-fill:#ffffff;">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                    <unFocusColor>
+                                        <LinearGradient endX="1.0" endY="1.0">
+                                            <stops>
+                                                <Stop color="#6407ea" offset="0.007246376811594203" />
+                                                <Stop color="#c14c91" offset="1.0" />
+                                            </stops>
+                                        </LinearGradient>
+                                    </unFocusColor>
+                                </JFXTextField> 
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Profile">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                </Tab>
+            </tabs>
+        </JFXTabPane>
+      
+        <!--right part-->
+        <AnchorPane layoutX="498.0" prefHeight="750.0" prefWidth="749.0" style="-fx-background-color: #ffffff;">
+            <children>
+                <ScrollPane layoutX="2.0" layoutY="50.0" prefHeight="670.0" prefWidth="745.0" style="-fx-background-color: #ffffff;">
+                    <content>
+                        <VBox fx:id="vbox" layoutX="0.0" prefHeight="670.0" prefWidth="720.0" style="-fx-background-color: #ffffff; -fx-padding:0px 10px;">
+                            <children>
+                                <HBox>
+                                <TextFlow styleClass="textFlowMessage">
+                                   <children>
+                                       <Text text="jnvjnerjknvk/jenvjknejknerf" />
+                                   </children>
+                                </TextFlow>
+                                </HBox>
+                                <TextFlow styleClass="textFlowMessageFlipped">
+                                   <children>
+                                       <Text styleClass="textWhite" text="bbvfbvkbkbvbdnklvblewkbdvbnevknbekbvhbfbvnkv sn jvbhbdvjh bv\n bhbvwehehgregehrgjknejvnevnekjvejkbvevjknejknvjnekjnvjenvkjenjkvnejknvjenvnjnvjnerjknvk/jenvjknejknerf" />
+                                   </children>
+                                </TextFlow>
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+                                <Label text="hi" />
+
+
+
+
+
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </children>
+        </AnchorPane>
+      
+        <AnchorPane layoutX="498.0" layoutY="750.0" prefHeight="50.0" prefWidth="752.0" style="-fx-background-color: transparent;">
+            <children>
+                <ImageView fx:id="file" fitHeight="25.0" fitWidth="25.0" layoutX="10.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="/imgs/Asset3.png" />
+                    </image>
+                </ImageView>
+                <ColorPicker fx:id="colorpicker" layoutX="45.0" layoutY="10.0" maxWidth="-Infinity" prefHeight="20.0" prefWidth="20.0">
+                    <effect>
+                        <ImageInput>
+                            <source>
+                                <Image url="/imgs/paint(1).png" />
+                            </source>
+                        </ImageInput>
+                    </effect>
+                </ColorPicker>
+                <ChoiceBox fx:id="fontchoice" layoutX="85.0" layoutY="10.0" prefHeight="32.0" prefWidth="32.0">
+                    <effect>
+                        <ImageInput>
+                            <source>
+                                <Image url="/imgs/001-typography.png" />
+                            </source>
+                        </ImageInput>
+                    </effect>
+                </ChoiceBox>
+                <ImageView fx:id="send" fitHeight="30.0" fitWidth="30.0" layoutX="685.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="/imgs/send.png" />
+                    </image>
+                </ImageView>
+                <TextField fx:id="msgText" layoutX="125.0" layoutY="5.0" prefHeight="40.0" prefWidth="500.0" promptText="Type Your Message.." style="-fx-background-radius: 15;" styleClass="msg-text-field">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </TextField>
+            </children>
+        </AnchorPane>
+      
+    </children>
    
 </AnchorPane>
