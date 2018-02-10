@@ -81,7 +81,7 @@ public class UserTableOperations {
             
             while (rs.next()) {
                   System.out.println(rs.getInt("id"));
-                 return (rs.getInt("id"));
+                 return (rs.getInt(DatabaseContract.UserTableContract.id));
             
 
             }
