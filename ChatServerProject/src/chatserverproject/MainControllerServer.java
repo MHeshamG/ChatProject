@@ -52,6 +52,7 @@ public class MainControllerServer {
     }
     
     public void AddRequest(String senderEmail,String receiverEmail){
-    
+        //TODO save request in database using RequetsTableOperations
+        System.out.println(senderEmail+" , "+receiverEmail);
     }
 }

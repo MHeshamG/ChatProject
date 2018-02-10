@@ -5,11 +5,13 @@
  */
 package chatserverproject;
 
+import chatprojectcommon.ClientInterface;
 import chatprojectcommon.ServerInterface;
 import chatprojectcommon.User;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -17,8 +19,10 @@ import java.util.ArrayList;
  */
 public class ServerImp extends UnicastRemoteObject implements ServerInterface{
     
-    public ServerImp()throws RemoteException{
+    HashMap<String,ClientInterface> usersHashMap;
     
+    public ServerImp()throws RemoteException{
+        
     }
 
     @Override
@@ -34,16 +38,19 @@ public class ServerImp extends UnicastRemoteObject implements ServerInterface{
     @Override
     public boolean sendRequest(String senderEmail,String receiverEmail) {
         //TODO save request at database requests table
+        MainControllerServer.getInstance().AddRequest(senderEmail,receiverEmail);
         return false;
     }
 
     @Override
     public ArrayList<User> getRequestsList(String email) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        return null;
     }
 
     @Override
     public ArrayList<User> getFriendsList(String email) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        return null;
     }
 }   
