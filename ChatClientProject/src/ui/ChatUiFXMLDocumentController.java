@@ -26,13 +26,20 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import notificationmanager.NotificationHandler;
 
 public class ChatUiFXMLDocumentController implements Initializable{
     
-
+    private Stage stage;
+    
+    @FXML
+    private TextField addFriendText; 
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        
        
         // freinds tab partition initialize
             setControls();
@@ -68,12 +75,13 @@ public class ChatUiFXMLDocumentController implements Initializable{
     // freinds tab partition
     ObservableList<User> friendsList;
     
-    @FXML
-    private TextField addFriendText; 
+   
     @FXML
     private TextField msgText; 
     @FXML
     ListView contactList;
+    @FXML
+    private ImageView fileButton;
     @FXML
     private ImageView send;
     @FXML
@@ -100,6 +108,8 @@ public class ChatUiFXMLDocumentController implements Initializable{
                 }
             });
     }
+    
+    // setting the controls of messaging
     private void setControls(){
         
         
@@ -127,10 +137,24 @@ public class ChatUiFXMLDocumentController implements Initializable{
             public void handle(Event event) {
                  String font = (String) fontchoice.getSelectionModel().getSelectedItem();
                  System.out.println(font);
-                 msgText.setStyle("-fx-background-radius:15px;-fx-text-inner-color:"+hex2+";" +"-fx-font-family:"+font+";");
+                 msgText.setStyle("-fx-background-radius:15px; -fx-text-inner-color:#"+hex2+";" +" -fx-font-family:"+font+";");
             }
         });
        
+         fileButton.setOnMouseClicked(new EventHandler<MouseEvent>(){
+             @Override
+             public void handle(MouseEvent event) {
+                 openFileChooser();
+             }
+         });
+    }
+    
+    //open file chooser to select file to be sent
+    private void openFileChooser(){
+        stage=(Stage)addFriendText.getScene().getWindow();
+        FileChooser fileChooser=new FileChooser();
+        //fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png"));
+        fileChooser.showOpenDialog(stage);
     }
     /**************************************************/
     

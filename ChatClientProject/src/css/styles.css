@@ -101,3 +101,7 @@
     -fx-text-fill:#ffffff; 
     -fx-fill:#ffffff;
 }
+/*sign in background*/
+.signin-backgroud{
+    -fx-background-image: url(/imgs/signinBackground2.png);
+}
