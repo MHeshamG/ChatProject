@@ -16,6 +16,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ListView;
@@ -24,8 +25,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import notificationmanager.NotificationHandler;
@@ -52,6 +57,8 @@ public class ChatUiFXMLDocumentController implements Initializable{
             
             //test Notification
             NotificationHandler.getInstance().shOwNewMessageNotification("hi there");
+            
+            vbox.setSpacing(8);
             
         /**************************************************/
 
@@ -88,8 +95,12 @@ public class ChatUiFXMLDocumentController implements Initializable{
     private  ColorPicker colorpicker;
     @FXML
     private ChoiceBox fontchoice;
+    @FXML 
+    VBox vbox;
     
-    private String hex2="000000";
+    private String hex2="#ffffff";
+    private String font="Arial";
+    
     
     public void setFriendsList(){
         friendsList=FXCollections.observableArrayList(MainControllerClient.getInstance().getFriendsList());
@@ -116,7 +127,11 @@ public class ChatUiFXMLDocumentController implements Initializable{
          send.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                   msgText.setText("");
+                   String msg=msgText.getText();
+                   if(!msg.equals("")){
+                       System.out.println(msg);
+                       addMessageAndSend(msg);
+                   }
                    System.out.println("xxxx");
             }
         });
@@ -125,7 +140,7 @@ public class ChatUiFXMLDocumentController implements Initializable{
             public void handle(Event t) {
                   Color color  = colorpicker.getValue();
                   hex2 = "#" + Integer.toHexString(color.hashCode()); 
-                  msgText.setStyle("-fx-background-radius:15px; -fx-text-inner-color:"+hex2+";");
+                    msgText.setStyle("-fx-background-radius:15px;-fx-font-family:"+font+";");
             }
         });
          
@@ -135,9 +150,9 @@ public class ChatUiFXMLDocumentController implements Initializable{
          fontchoice.setOnAction(new EventHandler() {
             @Override
             public void handle(Event event) {
-                 String font = (String) fontchoice.getSelectionModel().getSelectedItem();
+                 font = (String) fontchoice.getSelectionModel().getSelectedItem();
                  System.out.println(font);
-                 msgText.setStyle("-fx-background-radius:15px; -fx-text-inner-color:#"+hex2+";" +" -fx-font-family:"+font+";");
+                 msgText.setStyle("-fx-background-radius:15px; -fx-font-family:"+font+";");
             }
         });
        
@@ -156,6 +171,23 @@ public class ChatUiFXMLDocumentController implements Initializable{
         //fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png"));
         fileChooser.showOpenDialog(stage);
     }
+    
+    //Adds the message to vbox and sends it to server
+    private void addMessageAndSend(String msg){
+        HBox box=new HBox();
+        box.setAlignment(Pos.BASELINE_RIGHT);
+        Text txt=new Text();
+        txt.setText(msg);
+        txt.setStyle("-fx-fill:"+hex2+";-fx-font-family:"+font+";");
+        txt.getStyleClass().add("textWhite");
+        TextFlow txtFlow=new TextFlow(txt);
+        txtFlow.getStyleClass().add("textFlowMessageFlipped");
+        box.getChildren().add(txtFlow);
+        vbox.getChildren().add(box);
+        msgText.setText("");
+        //send to server
+    }
+    
     /**************************************************/
     
     //groups tab partition

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
@@ -87,60 +88,23 @@
             <children>
                 <ScrollPane layoutX="2.0" layoutY="50.0" prefHeight="670.0" prefWidth="745.0" style="-fx-background-color: #ffffff;">
                     <content>
-                        <VBox fx:id="vbox" layoutX="0.0" prefHeight="670.0" prefWidth="720.0" style="-fx-background-color: #ffffff; -fx-padding:0px 10px;">
+                        <VBox fx:id="vbox" layoutX="0.0" prefHeight="660.0" prefWidth="720.0" style="-fx-background-color: #ffffff; -fx-padding:0px 10px;">
                             <children>
-                                <HBox>
-                                <TextFlow styleClass="textFlowMessage">
-                                   <children>
-                                       <Text text="jnvjnerjknvk/jenvjknejknerf" />
-                                   </children>
-                                </TextFlow>
-                                </HBox>
-                                <TextFlow styleClass="textFlowMessageFlipped">
-                                   <children>
-                                       <Text styleClass="textWhite" text="bbvfbvkbkbvbdnklvblewkbdvbnevknbekbvhbfbvnkv sn jvbhbdvjh bv\n bhbvwehehgregehrgjknejvnevnekjvejkbvevjknejknvjnekjnvjenvkjenjkvnejknvjenvnjnvjnerjknvk/jenvjknejknerf" />
-                                   </children>
-                                </TextFlow>
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-                                <Label text="hi" />
-
-
-
-
-
+                                
                             </children>
                         </VBox>
                     </content>
                 </ScrollPane>
+            <AnchorPane prefHeight="62.0" prefWidth="749.0">
+               <children>
+                  <Text fill="#253241" layoutX="338.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chat">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Text>
+                  <Line endX="310.0" layoutX="394.0" layoutY="50.0" startX="-350.0" />
+               </children>
+            </AnchorPane>
             </children>
         </AnchorPane>
       

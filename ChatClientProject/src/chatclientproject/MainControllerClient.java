@@ -15,6 +15,7 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ui.ChatUiFXMLDocumentController;
 
 /**
  *
@@ -25,7 +26,12 @@ public class MainControllerClient {
     private static MainControllerClient mainControllerClient;
     private ServerInterface server;
     private String email;// email of the user of the app
-
+    private ChatUiFXMLDocumentController chatUiController;
+    
+    private MainControllerClient(){
+        
+    }
+    
     public String getEmail() {
         return email;
     }
@@ -33,11 +39,6 @@ public class MainControllerClient {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    private MainControllerClient(){
-        
-    }
-    
     public static MainControllerClient getInstance(){
         
         if(mainControllerClient==null){
@@ -101,6 +102,9 @@ public class MainControllerClient {
         return demo();
     }
     
+    public void setUi(ChatUiFXMLDocumentController chatUiFXMLDocumentController){
+        this.chatUiController=chatUiFXMLDocumentController;
+    }
     //testing method for friends list
     private ArrayList<User> demo(){
          ArrayList<User> users =new ArrayList<User>();
