@@ -19,17 +19,20 @@ public class User implements Serializable{
     private  String password;
     private  String status;
     private boolean onlineStatus;
+    private String profilepic;
     
     public User(String name){
         this.name=name;
     }
 
-    public User(String name, String gender, String email, String status, boolean onlineStatus) {
-        this.name = name;
+       public User(String username, String gender, String email, String status, boolean onlineStatus ,String profilePic ) {
+        this.userName = name;
         this.gender = gender;
         this.email = email;
         this.status = status;
         this.onlineStatus = onlineStatus;
+        this.profilepic=profilepic;
+       
     }
 
     public User(String name, String userName, String gender, String email, String password) {
