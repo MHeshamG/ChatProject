@@ -43,17 +43,12 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Groups">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                </Tab>
                 <Tab text="Requests">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                     </content>
                 </Tab>
-                <Tab text="Create Group">
+                <Tab text="Groups">
                     <content>
                         <AnchorPane layoutY="0.0" minHeight="0.0" minWidth="0.0" prefHeight="788.0" prefWidth="498.0" style="-fx-background-color: #253241;">
                             <children>

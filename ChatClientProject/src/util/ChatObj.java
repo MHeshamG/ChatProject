@@ -5,10 +5,28 @@
  */
 package util;
 
+import chatprojectcommon.Message;
+import java.util.ArrayList;
+
 /**
  * represents the chat between individuals and groups
  * @author mohamed hesham
  */
+
 public class ChatObj {
+
+    private ArrayList<Message>messages;
+
+    public ChatObj() {
+    
+    }
+    
+    public void appenedMessage(Message msg){
+        messages.add(msg);
+    }
+
+    public ArrayList<Message> getMessages() {
+        return messages;
+    }
     
 }

@@ -6,6 +6,7 @@ import chatprojectcommon.User;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -35,6 +36,7 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import notificationmanager.NotificationHandler;
+import util.ChatObj;
 
 public class ChatUiFXMLDocumentController implements Initializable{
     
@@ -50,7 +52,7 @@ public class ChatUiFXMLDocumentController implements Initializable{
         // freinds tab partition initialize
             setControls();
             
-            // the first step to make after the chat scene is visible is to show the freinds list  
+            // the first step to make after the chat scene is visible is to show the freinds list and create chatObjs  
             setFriendsList();
             
             //add listener to add friend text field
@@ -71,17 +73,14 @@ public class ChatUiFXMLDocumentController implements Initializable{
 
         /************************************************/
 
-        // create Group partition initialize
+       
 
-        /************************************************/
-
-        //profile partition initialize
-
-        /***********************************************/
+       
     }
     
     // freinds tab partition
     ObservableList<User> friendsList;
+    HashMap<String,ChatObj> chats; //represents the chats between individuals and groups
     
    
     @FXML
@@ -104,7 +103,10 @@ public class ChatUiFXMLDocumentController implements Initializable{
     
     
     public void setFriendsList(){
-        friendsList=FXCollections.observableArrayList(MainControllerClient.getInstance().getFriendsList());
+        ArrayList<User> list=MainControllerClient.getInstance().getFriendsList();
+        int friendsLength=list.size();
+        
+        friendsList=FXCollections.observableArrayList(list);
         contactList.setItems(friendsList);
         contactList.setCellFactory(new CustomListFactory());
     }
@@ -186,8 +188,10 @@ public class ChatUiFXMLDocumentController implements Initializable{
         box.getChildren().add(txtFlow);
         vbox.getChildren().add(box);
         msgText.setText("");
+        //create message
+        Message message=new Message(msg,null,null,font,hex2);
         //send to server
-        MainControllerClient.getInstance().sendMessage(new Message(msg,null,null,font,hex2));
+        //MainControllerClient.getInstance().sendMessage(new Message(msg,null,null,font,hex2));
     }
     
     /**************************************************/
@@ -199,12 +203,4 @@ public class ChatUiFXMLDocumentController implements Initializable{
     //requests partition
     
     /************************************************/
-    
-    // create Group partition
-    
-    /************************************************/
-    
-    //profile partition
-    
-    /***********************************************/
 }
