@@ -20,7 +20,7 @@ public class DatabaseHandler
     };
    
     
-     static Statement stmt;
+    private static Statement stmt;
     
     public static DatabaseHandler  getInstance()
     {
