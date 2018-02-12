@@ -10,14 +10,13 @@ import java.util.logging.Logger;
 import chatprojectcommon.*;
 import java.util.ArrayList;
 
-/**
- *
- * @author mohamed hesham
- */
+
 public class FreindTableOperations {
     
-     public void selectFriends(String email)
+     public ArrayList<User> selectFriends(String email)
      {
+         
+           ArrayList<User> friends=null;
          try {
              String query ;
              query="select "  +  DatabaseContract.UserTableContract.id  + "  ' , ' "
@@ -35,7 +34,7 @@ public class FreindTableOperations {
                      + "where  " + DatabaseContract.FriendTableContract.userId + "= "
                      + UserTableOperations.emailToId(email)  ;
              
-            ArrayList<User> friends=new ArrayList<User>();
+            friends=new ArrayList<User>();
             
             
              ResultSet rs;
@@ -63,7 +62,7 @@ public class FreindTableOperations {
          
           
          
-         
+         return friends;
          
                 
       }
