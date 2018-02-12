@@ -20,7 +20,7 @@ public class DatabaseHandler
     };
    
     
-      Statement stmt;
+     static Statement stmt;
     
     public static DatabaseHandler  getInstance()
     {
@@ -38,7 +38,7 @@ public class DatabaseHandler
            Connection con=null; 
         try{
               Class.forName("com.mysql.jdbc.Driver");
-              con =DriverManager.getConnection("jdbc:mysql://localhost:3306/javaprojectdatabase","root","root");
+              con =DriverManager.getConnection("jdbc:mysql://localhost:3306/javaprojectdatabase","root","");
               
               stmt =con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
         
@@ -107,6 +107,8 @@ public class DatabaseHandler
           ResultSet selectedData=null;
        
           try {
+              if(stmt==null)
+                  System.out.println("yes");
                  selectedData=stmt.executeQuery(query);
                  
           } catch (SQLException ex) {

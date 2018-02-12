@@ -43,7 +43,7 @@ public class ChatServerProject extends Application {
         MainControllerServer.getInstance().bindService();
 
        // UserTableOperations.getInstance().insertUser(user);
-        UserTableOperations.getInstance().selectUser("f", "h");
+//        UserTableOperations.getInstance().selectUser("f", "h");
         
         launch(args);
     }
