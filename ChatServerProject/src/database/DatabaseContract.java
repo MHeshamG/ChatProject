@@ -22,6 +22,8 @@ public class DatabaseContract {
         public static String password="password";
         public static String gender="gender";
         public static String status="status";
+        public static String onlineStatus="onlineStatus";
+
         public static String profilePic="profilePic";   
         
     }
