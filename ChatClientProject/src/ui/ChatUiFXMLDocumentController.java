@@ -1,6 +1,7 @@
 package ui;
 
 import chatclientproject.MainControllerClient;
+import chatprojectcommon.Message;
 import chatprojectcommon.User;
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -114,7 +115,7 @@ public class ChatUiFXMLDocumentController implements Initializable{
                 public void handle(KeyEvent event) {
                     String email=addFriendText.getText();
                     if(event.getCode()==KeyCode.ENTER && !email.equals("")){
-                        MainControllerClient.getInstance().sendRequest(email);
+                       // MainControllerClient.getInstance().sendRequest(email);
                     }
                 }
             });
@@ -186,6 +187,7 @@ public class ChatUiFXMLDocumentController implements Initializable{
         vbox.getChildren().add(box);
         msgText.setText("");
         //send to server
+        MainControllerClient.getInstance().sendMessage(new Message(msg,null,null,font,hex2));
     }
     
     /**************************************************/

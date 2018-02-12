@@ -86,9 +86,9 @@
         <!--right part-->
         <AnchorPane layoutX="498.0" prefHeight="750.0" prefWidth="749.0" style="-fx-background-color: #ffffff;">
             <children>
-                <ScrollPane layoutX="2.0" layoutY="50.0" prefHeight="670.0" prefWidth="745.0" style="-fx-background-color: #ffffff;">
+                <ScrollPane layoutX="2.0" layoutY="70.0" prefHeight="670.0" prefWidth="745.0" style="-fx-background-color: #ffffff;">
                     <content>
-                        <VBox fx:id="vbox" layoutX="0.0" prefHeight="660.0" prefWidth="720.0" style="-fx-background-color: #ffffff; -fx-padding:0px 10px;">
+                        <VBox fx:id="vbox" layoutX="0.0" prefHeight="650.0" prefWidth="720.0" style="-fx-background-color: #ffffff; -fx-padding:0px 10px;">
                             <children>
                                 
                             </children>
@@ -97,9 +97,9 @@
                 </ScrollPane>
             <AnchorPane prefHeight="62.0" prefWidth="749.0">
                <children>
-                  <Text fill="#253241" layoutX="338.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chat">
+                  <Text fill="#253241" layoutX="331.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HeyU" wrappingWidth="86.537109375">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="30.0" />
                      </font>
                   </Text>
                   <Line endX="310.0" layoutX="394.0" layoutY="50.0" startX="-350.0" />

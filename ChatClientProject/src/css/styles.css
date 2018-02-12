@@ -93,7 +93,7 @@
 }
 .textFlowMessageFlipped
 {
-    -fx-background-color: linear-gradient(to right ,#6407ea,#c14c91); 
+    -fx-background-color:#6407ea; 
     -fx-padding: 10px;
     -fx-background-radius:15px 0px 15px 15px;
 }
@@ -103,5 +103,5 @@
 }
 /*sign in background*/
 .signin-backgroud{
-    -fx-background-image: url(/imgs/signinBackground2.png);
+    -fx-background-image: url(/imgs/signinBackground3.png);
 }

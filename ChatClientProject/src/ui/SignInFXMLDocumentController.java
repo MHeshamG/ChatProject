@@ -67,7 +67,16 @@ public class SignInFXMLDocumentController implements Initializable {
         String email=EmailLogin.getText();
         String password=PasswordLogin.getText();
         
-        MainControllerClient.getInstance().login(email, password);
+       if( MainControllerClient.getInstance().login(email, password)){
+            try {
+                Stage stage = (Stage) signUpButton.getScene().getWindow();
+                Parent root = FXMLLoader.load(getClass().getResource("ChatUiFXMLDocument.fxml"));
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+            } catch (IOException ex) {
+                Logger.getLogger(SignInFXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+       }
     }
     
 }

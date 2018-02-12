@@ -5,6 +5,7 @@
  */
 package chatclientproject;
 
+import chatprojectcommon.Message;
 import chatprojectcommon.ServerInterface;
 import chatprojectcommon.User;
 import java.rmi.AccessException;
@@ -59,9 +60,15 @@ public class MainControllerClient {
     }
     
     public boolean login(String email,String password){
-        //TODO call login method at server
-        System.out.println(email+" "+password);
-        return false;
+        Boolean loginResult=false;
+        try {
+            //TODO call login method at server
+            //System.out.println(email+" "+password);
+            loginResult=server.login(email, password);
+        } catch (RemoteException ex) {
+            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return loginResult;
     }
     public boolean signUp(User user){
         try {
@@ -104,6 +111,14 @@ public class MainControllerClient {
     
     public void setUi(ChatUiFXMLDocumentController chatUiFXMLDocumentController){
         this.chatUiController=chatUiFXMLDocumentController;
+    }
+    
+    public void sendMessage(Message msg){
+        try {
+            server.sendMessage(msg);
+        } catch (RemoteException ex) {
+            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     //testing method for friends list
     private ArrayList<User> demo(){
