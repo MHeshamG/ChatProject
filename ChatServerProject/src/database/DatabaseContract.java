@@ -27,6 +27,26 @@ public class DatabaseContract {
     }
     
     
+        
+    public static class FriendTableContract{
+        
+        public static String tableName="friends";
+        public static String id ="id"; 
+        public static  String userId="userId";
+        public static  String friendId="friendId";
+        
+        
+    }
+    
+      public static class RequesttableContract{
+        
+        public static String tableName="requests";
+        public static  String id="id"; 
+        public static  String senderId="senderId";
+        public static  String recieverId="recieverId";
+        
+        
+    }
     
     
     

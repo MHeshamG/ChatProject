@@ -65,7 +65,7 @@ public class UserTableOperations {
 
     }
     
-       public int emailToId(String email)
+       public static int emailToId(String email)
     {
     
         try {
