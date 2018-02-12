@@ -5,11 +5,13 @@
  */
 package chatprojectcommon;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ElsOoObkey
  */
-public class Message {
+public class Message implements Serializable{
     private String body;
     private String from;
     private String to;
