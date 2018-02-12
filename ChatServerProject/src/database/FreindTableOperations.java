@@ -43,7 +43,7 @@ public class FreindTableOperations {
              while(rs.next())
              {
                  
-            /* User user=new User( 
+             User user=new User( 
                      rs.getString(DatabaseContract.UserTableContract.userName),
                      rs.getString(DatabaseContract.UserTableContract.gender),
                      rs.getString(DatabaseContract.UserTableContract.email), 
@@ -51,8 +51,8 @@ public class FreindTableOperations {
                      rs.getBoolean(DatabaseContract.UserTableContract.onlineStatus),
                      rs.getString(DatabaseContract.UserTableContract.profilePic)
                      
-                   ) ;*/
-            // friends.add(user);
+                   ) ;
+             friends.add(user);
                      
                
              }
