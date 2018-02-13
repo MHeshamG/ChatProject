@@ -17,13 +17,22 @@ public class Message implements Serializable{
     private String to;
     private String font;
     private String color;
-
-    public Message(String body, String from, String to, String font, String color) {
+    private int fontSize; 
+    public Message(String body, String from, String to, String font, String color , int fontSize) {
         this.body = body;
         this.from = from;
         this.to = to;
         this.font = font;
         this.color = color;
+        this.fontSize=fontSize;
+    }
+
+    public int getFontSize() {
+        return fontSize;
+    }
+
+    public void setFontSize(int fontSize) {
+        this.fontSize = fontSize;
     }
 
     public String getBody() {
