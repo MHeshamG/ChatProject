@@ -52,7 +52,7 @@ public class UserTableOperations {
         query = "select * from " + DatabaseContract.UserTableContract.tableName
                 + " where " + DatabaseContract.UserTableContract.email + " = " + "'" + email + "'"
                 + "and " + DatabaseContract.UserTableContract.password + "=" + "'" + password + "'";
-        
+
         System.out.println(query);
         ResultSet selectedData = DatabaseHandler.getInstance().select(query);
         try {
@@ -64,45 +64,43 @@ public class UserTableOperations {
         return checkIfExist;
 
     }
-    
-       public static int emailToId(String email)
-    {
-    
+
+    public static int emailToId(String email) {
+
         try {
             String query;
             ResultSet rs;
-            
-            query="select " +  DatabaseContract.UserTableContract.id
-                    +" from "+  DatabaseContract.UserTableContract.tableName
-                    +" where "+ DatabaseContract.UserTableContract.email+"="+"'"+email+"'" ;
+
+            query = "select " + DatabaseContract.UserTableContract.id
+                    + " from " + DatabaseContract.UserTableContract.tableName
+                    + " where " + DatabaseContract.UserTableContract.email + "=" + "'" + email + "'";
             System.out.println(query);
-            
-            rs= DatabaseHandler.getInstance().select(query);
-            
+
+            rs = DatabaseHandler.getInstance().select(query);
+
             while (rs.next()) {
-                  System.out.println(rs.getInt("id"));
-                 return (rs.getInt(DatabaseContract.UserTableContract.id));
-            
+                System.out.println(rs.getInt("id"));
+                return (rs.getInt(DatabaseContract.UserTableContract.id));
 
             }
-             
-         
+
         } catch (SQLException ex) {
             Logger.getLogger(UserTableOperations.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
 
-        
-            return -1;  
-}
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        return -1;
+    }
+
+    public boolean userStatus(String email) {
+        String query;
+
+        query = "update " + DatabaseContract.UserTableContract.tableName
+                + " set " + DatabaseContract.UserTableContract.onlineStatus + "=" + '1'
+                + " where " + DatabaseContract.UserTableContract.email + "=" + "'" + email + "'";
+        System.out.println(query);
+        DatabaseHandler.getInstance().update(query);
+
+        return true;
+    }
+
 }
