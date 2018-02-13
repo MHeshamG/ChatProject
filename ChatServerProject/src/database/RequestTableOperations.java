@@ -47,8 +47,35 @@ public class RequestTableOperations {
     
     
     
+    public void comfirmRequest(String senderEmail, String recieverEmail)
+    {
+               String query;
+               query="insert into " + DatabaseContract.FriendTableContract.tableName + " "
+                       + "values('" + UserTableOperations.emailToId(senderEmail)
+                       + "','" + UserTableOperations.emailToId(recieverEmail) +
+                           "');";
+              
+              DatabaseHandler.getInstance().insert(query);
+      
+             deleteRequest(senderEmail, recieverEmail);
+             
+             
     
+    }
     
+    public void deleteRequest(String senderEmail, String recieverEmail)
+            
+    {
     
+                String query;
+                query="delete from "+DatabaseContract.RequesttableContract.tableName + " "
+                        +"where  "+DatabaseContract.RequesttableContract.senderId   + " = "
+                        +UserTableOperations.emailToId(senderEmail) + " " +"and " +
+                        DatabaseContract.RequesttableContract.recieverId   + " = "
+                        +UserTableOperations.emailToId(recieverEmail)  ;
+        
+        DatabaseHandler.getInstance().delete(query);
+        
+    }
     
 }
