@@ -8,6 +8,7 @@ package database;
 import java.sql.*; 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import oracle.jdbc.driver.OracleDriver;
 public class DatabaseHandler 
 {    
     
@@ -37,9 +38,14 @@ public class DatabaseHandler
     {
            Connection con=null; 
         try{
-              Class.forName("com.mysql.jdbc.Driver");
-              con =DriverManager.getConnection("jdbc:mysql://localhost:3306/javaprojectdatabase","root","");
-              
+             // Class.forName("com.mysql.jdbc.Driver");
+              //con =DriverManager.getConnection("jdbc:mysql://localhost:3306/javaprojectdatabase","root","");
+                  DriverManager.registerDriver(new OracleDriver());
+            // Second Step -----> open connection
+            //  con is null if no connection
+            con = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@127.0.0.1:1521:xe", "hr", "hr");
+            System.out.println("connection "+ con);
               stmt =con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
         
   

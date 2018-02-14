@@ -15,7 +15,7 @@ public class DatabaseContract {
     public static class UserTableContract{
     
         public static String tableName="users";
-        public static String id="id";
+        public static String id="userid";
         public static String name="name";
         public static String userName="username";
         public static String email="email";
@@ -34,9 +34,9 @@ public class DatabaseContract {
         
         public static String tableName="friends";
         public static String id ="id"; 
-        public static  String userId="userId";
-        public static  String friendId="friendId";
-        
+        public static  String userId="userid";
+        public static  String friendId="friendid";
+            
         
     }
     
@@ -44,8 +44,8 @@ public class DatabaseContract {
         
         public static String tableName="requests";
         public static  String id="id"; 
-        public static  String senderId="senderId";
-        public static  String recieverId="recieverId";
+        public static  String senderId="senderid";
+        public static  String recieverId="recieverid";
         
         
     }

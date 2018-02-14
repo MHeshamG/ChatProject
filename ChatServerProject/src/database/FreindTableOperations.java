@@ -9,26 +9,27 @@ import java.util.ArrayList;
 
 public class FreindTableOperations {
     
-     public ArrayList<User> selectFriends(String email)
+     public  static ArrayList<User> selectFriends(String email)
      {
          
            ArrayList<User> friends=null;
          try {
              String query ;
-             query="select "  +  DatabaseContract.UserTableContract.id  + "  ' , ' "
-                     + DatabaseContract.UserTableContract.email + " ','  "
-                        + DatabaseContract.UserTableContract.userName + " ','  "
-                      + DatabaseContract.UserTableContract.gender + " ','  "
-                     + DatabaseContract.UserTableContract.status + " ','  "
-                     + DatabaseContract.UserTableContract.onlineStatus + " ','  "
-                     + DatabaseContract.UserTableContract.profilePic  +
+             query="select "  +  DatabaseContract.UserTableContract.id  + ","
+                     + DatabaseContract.UserTableContract.email + ","
+                        + DatabaseContract.UserTableContract.userName + ","
+                      + DatabaseContract.UserTableContract.gender + ","
+                     + DatabaseContract.UserTableContract.status + ","
+                     + DatabaseContract.UserTableContract.onlineStatus + ","
+                     + DatabaseContract.UserTableContract.profilePic  + " "+
                      "from "  +  DatabaseContract.UserTableContract.tableName + " "
                      + "where " + DatabaseContract.UserTableContract.id + " in " + " "
-                     
+                     +"("
                      + "select  " + DatabaseContract.FriendTableContract.friendId + " "
                      + "from  " + DatabaseContract.FriendTableContract.tableName + " "
                      + "where  " + DatabaseContract.FriendTableContract.userId + "= "
-                     + UserTableOperations.emailToId(email)  ;
+                     + UserTableOperations.emailToId(email) + ")" ;
+             System.out.println(query);
              
             friends=new ArrayList<User>();
             
@@ -42,7 +43,7 @@ public class FreindTableOperations {
                      rs.getString(DatabaseContract.UserTableContract.userName),
                      rs.getString(DatabaseContract.UserTableContract.gender),
                      rs.getString(DatabaseContract.UserTableContract.email), 
-                     rs.getString(DatabaseContract.UserTableContract.status), 
+                     rs.getInt(DatabaseContract.UserTableContract.status), 
                      rs.getBoolean(DatabaseContract.UserTableContract.onlineStatus),
                      rs.getString(DatabaseContract.UserTableContract.profilePic)
                      

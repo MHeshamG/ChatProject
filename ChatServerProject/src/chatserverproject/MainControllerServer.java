@@ -6,6 +6,7 @@
 package chatserverproject;
 
 import chatprojectcommon.User;
+import database.RequestTableOperations;
 import database.UserTableOperations;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -52,7 +53,9 @@ public class MainControllerServer {
     }
     
     public void AddRequest(String senderEmail,String receiverEmail){
-        //TODO save request in database using RequetsTableOperations
+        //TODO save request in database using RequetsTableOperation
+        
+        RequestTableOperations.sendRequest(senderEmail, receiverEmail);
         System.out.println(senderEmail+" , "+receiverEmail);
     }
 }

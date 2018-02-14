@@ -28,20 +28,23 @@ public class UserTableOperations {
         return userTableOperationsObj;
     }
 
-    public void insertUser(User user) {
+    public  static void insertUser(User user) {
         String query;
 
         query = "insert into " + DatabaseContract.UserTableContract.tableName + "("
-                + DatabaseContract.UserTableContract.userName
+                + DatabaseContract.UserTableContract.id
+                + ","+DatabaseContract.UserTableContract.userName
                 + "," + DatabaseContract.UserTableContract.name
                 + "," + DatabaseContract.UserTableContract.password
                 + "," + DatabaseContract.UserTableContract.email
                 + "," + DatabaseContract.UserTableContract.gender + ") "
-                + "values('" + user.getUserName()
-                + "','" + user.getName()
-                + "','" + user.getPassword()
-                + "','" + user.getEmail()
-                + "','" + user.getGender() + "');";
+                + "values(" +  user.getId() 
+                + "," + " ' " + user.getUserName() +"'"
+                + "," + "'"+ user.getName() + "'"
+                + "," + "'" +user.getPassword() + "'"
+                + "," + "'"+ user.getEmail()+"'"
+                + "," + "'" +user.getGender()+ "'" + ")";
+        
         System.out.println(query);
         DatabaseHandler.getInstance().insert(query);
     }
@@ -66,10 +69,12 @@ public class UserTableOperations {
     }
 
     public static int emailToId(String email) {
-
+           ResultSet rs=null;
+           
+           int res=0;
         try {
             String query;
-            ResultSet rs;
+           
 
             query = "select " + DatabaseContract.UserTableContract.id
                     + " from " + DatabaseContract.UserTableContract.tableName
@@ -77,18 +82,27 @@ public class UserTableOperations {
             System.out.println(query);
 
             rs = DatabaseHandler.getInstance().select(query);
+           if(rs!=null){
+          
+              rs.next();
+                res=rs.getInt(DatabaseContract.UserTableContract.id); 
 
-            while (rs.next()) {
-                System.out.println(rs.getInt("id"));
-                return (rs.getInt(DatabaseContract.UserTableContract.id));
-
-            }
-
-        } catch (SQLException ex) {
+        }else{
+           
+           res=-1;
+           } 
+           
+           
+         
+        }
+        catch (SQLException ex) {
             Logger.getLogger(UserTableOperations.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        return -1;
+        
+        
+          
+               return res;    
+    
     }
 
     public boolean userStatus(String email) {
