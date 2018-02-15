@@ -59,4 +59,24 @@ public class ServerImp extends UnicastRemoteObject implements ServerInterface {
     public void sendMessage(Message msg) throws RemoteException {
         System.out.println(msg.getBody()); 
     }
+
+    @Override
+    public boolean requestToSendFile(String fileName, String to) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void sendMessageFile(byte[] data, int offset, int len, String fileName) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void confirmRequest(String senderEmail, String receiverEmail) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deletRequest(String senderEmail, String receiverEmail) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

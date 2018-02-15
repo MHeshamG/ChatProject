@@ -23,7 +23,7 @@ public class DatabaseContract {
         public static String gender="gender";
         public static String status="status";
         public static String onlineStatus="onlineStatus";
-
+        public static String country="country";
         public static String profilePic="profilePic";   
         
     }

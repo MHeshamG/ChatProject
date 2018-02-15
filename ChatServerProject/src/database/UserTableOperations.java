@@ -32,18 +32,25 @@ public class UserTableOperations {
         String query;
 
         query = "insert into " + DatabaseContract.UserTableContract.tableName + "("
-                + DatabaseContract.UserTableContract.id
                 + ","+DatabaseContract.UserTableContract.userName
                 + "," + DatabaseContract.UserTableContract.name
                 + "," + DatabaseContract.UserTableContract.password
                 + "," + DatabaseContract.UserTableContract.email
-                + "," + DatabaseContract.UserTableContract.gender + ") "
-                + "values(" +  user.getId() 
-                + "," + " ' " + user.getUserName() +"'"
+                + "," + DatabaseContract.UserTableContract.gender 
+                +","+ DatabaseContract.UserTableContract.onlineStatus
+                +","+ DatabaseContract.UserTableContract.status
+                +","+ DatabaseContract.UserTableContract.country
+                +") "
+                + "values("   
+                + "," + "'" + user.getUserName() +"'"
                 + "," + "'"+ user.getName() + "'"
                 + "," + "'" +user.getPassword() + "'"
                 + "," + "'"+ user.getEmail()+"'"
-                + "," + "'" +user.getGender()+ "'" + ")";
+                + "," + "'" +user.getGender()+ "'"
+                +","+"'1'"
+                +","+"'0'"
+                +","+user.getCountry();
+                + ")";
         
         System.out.println(query);
         DatabaseHandler.getInstance().insert(query);
