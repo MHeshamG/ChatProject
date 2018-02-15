@@ -51,8 +51,14 @@ public class CustomListFactory implements Callback<ListView<User>,ListCell<User>
             FXMLLoader loader=new FXMLLoader();
             listItem=loader.load(getClass().getResource("ListItemFXMLDocument.fxml").openStream());
             ListItemFXMLDocumentController listItemController=loader.getController();
-            listItemController.setProfilePic(new File("src/imgs/download.png"));
-            listItemController.setOnlineState(false);
+            if(user.getGender().equals("f"))
+                listItemController.setProfilePic(new File("src/imgs/female.png"));
+            else
+                listItemController.setProfilePic(new File("src/imgs/male.jpg"));
+            if(user.isOnlineStatus())
+                listItemController.setOnlineState(true);
+            else
+                listItemController.setOnlineState(false);
             listItemController.setStatus("Busy");
             listItem.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override

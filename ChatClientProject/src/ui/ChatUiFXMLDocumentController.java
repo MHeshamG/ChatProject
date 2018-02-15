@@ -1,6 +1,7 @@
 package ui;
 
 import chatclientproject.MainControllerClient;
+import chatprojectcommon.GroupMsg;
 import chatprojectcommon.Message;
 import chatprojectcommon.User;
 import java.net.URL;
@@ -12,6 +13,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -19,6 +21,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ListView;
@@ -59,7 +62,7 @@ public class ChatUiFXMLDocumentController implements Initializable{
             handleAddFriendTextField();
             
             //test Notification
-            NotificationHandler.getInstance().shOwNewMessageNotification("hi there");
+            NotificationHandler.getInstance().shOwNewMessageNotification("hello");
             
             vbox.setSpacing(8);
             
@@ -80,7 +83,7 @@ public class ChatUiFXMLDocumentController implements Initializable{
     
     // freinds tab partition
     ObservableList<User> friendsList;
-    HashMap<String,ChatObj> chats; //represents the chats between individuals and groups
+    
     
    
     @FXML
@@ -131,10 +134,20 @@ public class ChatUiFXMLDocumentController implements Initializable{
             @Override
             public void handle(MouseEvent event) {
                    String msg=msgText.getText();
-                   if(!msg.equals("")){
+                  // if(!msg.equals("")){
                        System.out.println(msg);
-                       addMessageAndSend(msg);
-                   }
+                       addMessage(msg);
+                       //send to server
+                       //friendsList.addAll(MainControllerClient.getInstance().getFriendsList2());
+                       //contactList.setItems(null);
+                      // contactList.setItems(friendsList);
+                       //contactList.setCellFactory(new CustomListFactory());
+                       
+                       friendsList.get(0).setOnlineStatus(true);
+                       contactList.refresh();
+                      //friendsList.clear();
+                      //friendsList.addAll(MainControllerClient.getInstance().getFriendsList2());
+                  // }
                    System.out.println("xxxx");
             }
         });
@@ -176,7 +189,7 @@ public class ChatUiFXMLDocumentController implements Initializable{
     }
     
     //Adds the message to vbox and sends it to server
-    private void addMessageAndSend(String msg){
+    private void addMessage(String msg){
         HBox box=new HBox();
         box.setAlignment(Pos.BASELINE_RIGHT);
         Text txt=new Text();
@@ -189,7 +202,7 @@ public class ChatUiFXMLDocumentController implements Initializable{
         vbox.getChildren().add(box);
         msgText.setText("");
         //create message
-        Message message=new Message(msg,null,null,font,hex2);
+        Message message=new Message(msg,null,null,font,hex2,0);
         //send to server
         //MainControllerClient.getInstance().sendMessage(new Message(msg,null,null,font,hex2));
     }
@@ -197,7 +210,32 @@ public class ChatUiFXMLDocumentController implements Initializable{
     /**************************************************/
     
     //groups tab partition
+    @FXML
+    private TextField GroupNameTextField;
+    @FXML
+    private TextField AddMemberTextField;
     
+    public void setGroupTextFields(){
+        GroupNameTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent event) {
+                    String groupName=GroupNameTextField.getText();
+                    if(event.getCode()==KeyCode.ENTER && !groupName.equals("")){
+                       // MainControllerClient.getInstance().sendRequest(email);
+                       GroupMsg g=new GroupMsg(groupName);
+                    }
+                }
+            });
+        AddMemberTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent event) {
+                    String memberEmail=AddMemberTextField.getText();
+                    if(event.getCode()==KeyCode.ENTER && !memberEmail.equals("")){
+                       // MainControllerClient.getInstance().sendRequest(email);
+                    }
+                }
+            });
+    }
     /*************************************************/
     
     //requests partition

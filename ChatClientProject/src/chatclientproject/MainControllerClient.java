@@ -14,9 +14,11 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ui.ChatUiFXMLDocumentController;
+import util.ChatObj;
 
 /**
  *
@@ -28,9 +30,10 @@ public class MainControllerClient {
     private ServerInterface server;
     private String email;// email of the user of the app
     private ChatUiFXMLDocumentController chatUiController;
+    HashMap<String,ChatObj> chats; //represents the chats between individuals and groups
     
     private MainControllerClient(){
-        
+        chats=new HashMap<>();
     }
     
     public String getEmail() {
@@ -120,12 +123,37 @@ public class MainControllerClient {
             Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void addToChatObj(String email,Message msg){
+        
+    }
     //testing method for friends list
     private ArrayList<User> demo(){
          ArrayList<User> users =new ArrayList<User>();
         for(int i=0;i<10;i++){
-            users.add(new User("Mohamed"));
+            User user=new User("Mohamed");
+            user.setGender("m");
+            user.setOnlineStatus(false);
+            users.add(user);
         }
         return users;
+    }
+    private ArrayList<User> demo2(){
+         ArrayList<User> users =new ArrayList<User>();
+        for(int i=0;i<10;i++){
+            User user=new User("aliaa");
+            user.setGender("f");
+            user.setOnlineStatus(true);
+            users.add(user);
+        }
+        return users;
+    }
+public ArrayList<User> getFriendsList2(){
+        //TODO call the server getFriendsList function
+        
+        //demo method
+        
+        
+        return demo2();
     }
 }

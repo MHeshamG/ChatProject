@@ -52,29 +52,39 @@
                     <content>
                         <AnchorPane layoutY="0.0" minHeight="0.0" minWidth="0.0" prefHeight="788.0" prefWidth="498.0" style="-fx-background-color: #253241;">
                             <children>
-                                <ListView fx:id="contactListCreateGroup" layoutY="60.0" prefHeight="690.0" prefWidth="498.0" />
-                                <JFXTextField fx:id="createGroupText" focusColor="#ffffff" layoutX="9.0" layoutY="0.0" prefHeight="51.0" prefWidth="480.0" promptText="Group Name" style="-fx-text-fill:#ffffff;">
+                                <ListView fx:id="contactListCreateGroup" layoutY="130.0" prefHeight="690.0" prefWidth="498.0" />
+                                <JFXTextField fx:id="GroupNameTextField" focusColor="#ffffff" layoutX="9.0" layoutY="0.0" prefHeight="51.0" prefWidth="480.0" promptText="Group Name" style="-fx-text-fill:#ffffff;">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
                                     <unFocusColor>
                                         <LinearGradient endX="1.0" endY="1.0">
                                             <stops>
+                                                <Stop color="#6407ea" />
                                                 <Stop color="#6407ea" offset="0.007246376811594203" />
                                                 <Stop color="#c14c91" offset="1.0" />
                                             </stops>
                                         </LinearGradient>
                                     </unFocusColor>
-                                </JFXTextField> 
+                                </JFXTextField>
+                        <JFXTextField fx:id="AddMemberTextField" focusColor="WHITE" layoutX="59.0" layoutY="71.0" prefHeight="51.0" prefWidth="380.0" promptText="Add Member">
+                           <unFocusColor>
+                              <LinearGradient endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop color="#6407ea" />
+                                    <Stop color="#c14c91" offset="1.0" />
+                                 </stops>
+                              </LinearGradient>
+                           </unFocusColor>
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </JFXTextField> 
                             </children>
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Profile">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                </Tab>
+                
             </tabs>
         </JFXTabPane>
       
