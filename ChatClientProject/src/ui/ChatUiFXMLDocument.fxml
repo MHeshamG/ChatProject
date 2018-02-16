@@ -45,7 +45,11 @@
                 </Tab>
                 <Tab text="Requests">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                         <AnchorPane layoutY="50.0" minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="498.0" style="-fx-background-color: #253241;">
+                            <children>
+                                <ListView fx:id="requestList" layoutY="0.0" prefHeight="690.0" prefWidth="498.0" />
+                            </children>
+                         </AnchorPane>
                     </content>
                 </Tab>
                 <Tab text="Groups">

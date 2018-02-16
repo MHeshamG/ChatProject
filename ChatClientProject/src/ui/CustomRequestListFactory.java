@@ -51,7 +51,7 @@ public class CustomRequestListFactory implements Callback<ListView<User>,ListCel
         try {
             FXMLLoader loader=new FXMLLoader();
             listItem=loader.load(getClass().getResource("RequestListFXMLDocument.fxml").openStream());
-            ListItemFXMLDocumentController listItemController=loader.getController();
+            RequestListFXMLDocumentController listItemController=loader.getController();
             
             if(user.getGender().equals("f"))
                 listItemController.setProfilePic(new File("src/imgs/female.png"));

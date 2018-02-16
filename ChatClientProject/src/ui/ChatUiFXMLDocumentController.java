@@ -59,6 +59,7 @@ public class ChatUiFXMLDocumentController implements Initializable{
             
             // the first step to make after the chat scene is visible is to show the freinds list and create chatObjs  
             setFriendsList();
+            setRequestsList();
             
             //add listener to add friend text field
             handleAddFriendTextField();
@@ -253,6 +254,19 @@ public class ChatUiFXMLDocumentController implements Initializable{
     /*************************************************/
     
     //requests partition
+    
+    @FXML
+    private ListView requestList;
+            
+    ObservableList<Object> requestsList;
+    
+    private void setRequestsList(){
+        ArrayList<User> list=MainControllerClient.getInstance().getRequestsList();
+        requestsList=FXCollections.observableArrayList(list);
+        
+        requestList.setCellFactory(new CustomRequestListFactory());
+        requestList.setItems(requestsList);
+    }
     
     /************************************************/
 }

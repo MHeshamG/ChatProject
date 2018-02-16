@@ -168,8 +168,19 @@ public class MainControllerClient {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                chatUiController.appenedMsgToChat(msg);            }
+                chatUiController.appenedMsgToChat(msg);            
+            }
         });
         
+    }
+    public ArrayList<User> getRequestsList(){
+        ArrayList<User> list=null;
+        try {
+            list=server.getRequestsList(email);
+//            System.out.println("request list: "+list.get(0).getName());
+        } catch (RemoteException ex) {
+            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 }
