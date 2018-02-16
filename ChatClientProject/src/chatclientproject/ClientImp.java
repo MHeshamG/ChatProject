@@ -6,6 +6,7 @@
 package chatclientproject;
 
 import chatprojectcommon.ClientInterface;
+import chatprojectcommon.Message;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -17,8 +18,13 @@ public class ClientImp extends UnicastRemoteObject implements ClientInterface{
     
     String email;//email of this user
     
-    public ClientImp(String email)throws RemoteException{
-        this.email=email;
+    public ClientImp()throws RemoteException{
+    }
+
+    @Override
+    public void receiveMessage(Message msg) throws RemoteException {
+        System.out.println("rec:"+msg.getBody());
+        MainControllerClient.getInstance().appenedMsgToChat(msg);
     }
     
     

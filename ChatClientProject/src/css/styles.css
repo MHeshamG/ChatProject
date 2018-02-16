@@ -88,8 +88,8 @@
 .textFlowMessage
 {
     -fx-background-color: #eeeeef; 
-    -fx-padding: 5px;
-    -fx-background-radius:0px 15px 15px 10px;
+    -fx-padding: 10px;
+    -fx-background-radius:0px 15px 15px 15px;
 }
 .textFlowMessageFlipped
 {

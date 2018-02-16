@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import ui.ChatUiFXMLDocumentController;
 import util.ChatObj;
 
@@ -30,10 +31,19 @@ public class MainControllerClient {
     private ServerInterface server;
     private String email;// email of the user of the app
     private ChatUiFXMLDocumentController chatUiController;
-    HashMap<String,ChatObj> chats; //represents the chats between individuals and groups
+    private HashMap<String,ChatObj> chats; //represents the chats between individuals and groups
+    private ClientImp cc;
+    private String toEmail;
+
+    
     
     private MainControllerClient(){
         chats=new HashMap<>();
+        try {
+            cc=new ClientImp();
+        } catch (RemoteException ex) {
+            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public String getEmail() {
@@ -42,7 +52,17 @@ public class MainControllerClient {
 
     public void setEmail(String email) {
         this.email = email;
+        System.out.println("<>:"+email);
     }
+    
+    public String getToEmail() {
+        return toEmail;
+    }
+
+    public void setToEmail(String toEmail) {
+        this.toEmail = toEmail;
+    }
+    
     public static MainControllerClient getInstance(){
         
         if(mainControllerClient==null){
@@ -68,6 +88,9 @@ public class MainControllerClient {
             //TODO call login method at server
             //System.out.println(email+" "+password);
             loginResult=server.login(email, password);
+            if(loginResult){
+                server.register(email, cc);
+            }
         } catch (RemoteException ex) {
             Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -84,6 +107,14 @@ public class MainControllerClient {
         return false;
     }
     
+    public void setOnline(){
+        try {
+            server.setOnline(email);
+        } catch (RemoteException ex) {
+            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * connects to the server and send a friend requests on this email
      * @param email email of the person here the add request will be sent to
@@ -91,11 +122,11 @@ public class MainControllerClient {
     public void sendRequest(String receiverEmail){
         try {
             //TODO call server sendRequest method
+             System.out.println(email);
             server.sendRequest(email, receiverEmail);
         } catch (RemoteException ex) {
             Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(email);
     }
     
     /**
@@ -104,12 +135,18 @@ public class MainControllerClient {
      * @return ArrayList of friends
      */
     public ArrayList<User> getFriendsList(){
-        //TODO call the server getFriendsList function
-        
-        //demo method
-        
-        
-        return demo();
+        ArrayList<User> list=null;
+        try {
+            //TODO call the server getFriendsList function
+            
+            //demo method
+            
+            
+            list=server.getFriendsList(email);
+        } catch (RemoteException ex) {
+            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
     
     public void setUi(ChatUiFXMLDocumentController chatUiFXMLDocumentController){
@@ -127,33 +164,12 @@ public class MainControllerClient {
     public void addToChatObj(String email,Message msg){
         
     }
-    //testing method for friends list
-    private ArrayList<User> demo(){
-         ArrayList<User> users =new ArrayList<User>();
-        for(int i=0;i<10;i++){
-            User user=new User("Mohamed");
-            user.setGender("m");
-            user.setOnlineStatus(false);
-            users.add(user);
-        }
-        return users;
-    }
-    private ArrayList<User> demo2(){
-         ArrayList<User> users =new ArrayList<User>();
-        for(int i=0;i<10;i++){
-            User user=new User("aliaa");
-            user.setGender("f");
-            user.setOnlineStatus(true);
-            users.add(user);
-        }
-        return users;
-    }
-public ArrayList<User> getFriendsList2(){
-        //TODO call the server getFriendsList function
+    public void appenedMsgToChat(Message msg){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                chatUiController.appenedMsgToChat(msg);            }
+        });
         
-        //demo method
-        
-        
-        return demo2();
     }
 }

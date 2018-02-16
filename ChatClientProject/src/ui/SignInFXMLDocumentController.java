@@ -20,7 +20,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javax.imageio.metadata.IIOInvalidTreeException;
 
 /**
  *
@@ -38,6 +40,8 @@ public class SignInFXMLDocumentController implements Initializable {
     private Button LoginButton;
     @FXML
     private Button signUpButton;
+    @FXML
+    private Text invalidText;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -69,13 +73,19 @@ public class SignInFXMLDocumentController implements Initializable {
         
        if( MainControllerClient.getInstance().login(email, password)){
             try {
+                MainControllerClient.getInstance().setEmail(email);
+                MainControllerClient.getInstance().setOnline();
                 Stage stage = (Stage) signUpButton.getScene().getWindow();
                 Parent root = FXMLLoader.load(getClass().getResource("ChatUiFXMLDocument.fxml"));
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
+                
             } catch (IOException ex) {
                 Logger.getLogger(SignInFXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
             }
+       }
+       else{
+           invalidText.setText("Invalid email or password");
        }
     }
     

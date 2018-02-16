@@ -30,6 +30,9 @@ public class ListItemFXMLDocumentController implements Initializable {
     private Stage stage;
     
     @FXML
+    private Text userName;
+    
+    @FXML
     Text statusText;
     
     @FXML
@@ -70,5 +73,9 @@ public class ListItemFXMLDocumentController implements Initializable {
     
     public void setStatus(String status){
         statusText.setText(status);
+    }
+    
+    public void setUserName(String name){
+        userName.setText(name);
     }
 }

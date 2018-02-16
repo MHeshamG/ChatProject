@@ -51,6 +51,8 @@ public class ChatUiFXMLDocumentController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
+        MainControllerClient.getInstance().setUi(this);
+        
        
         // freinds tab partition initialize
             setControls();
@@ -120,7 +122,7 @@ public class ChatUiFXMLDocumentController implements Initializable{
                 public void handle(KeyEvent event) {
                     String email=addFriendText.getText();
                     if(event.getCode()==KeyCode.ENTER && !email.equals("")){
-                       // MainControllerClient.getInstance().sendRequest(email);
+                        MainControllerClient.getInstance().sendRequest(email);
                     }
                 }
             });
@@ -134,10 +136,11 @@ public class ChatUiFXMLDocumentController implements Initializable{
             @Override
             public void handle(MouseEvent event) {
                    String msg=msgText.getText();
-                  // if(!msg.equals("")){
+                   if(!msg.equals("")){
                        System.out.println(msg);
                        addMessage(msg);
                        //send to server
+                       //sendMessage(msg);
                        //friendsList.addAll(MainControllerClient.getInstance().getFriendsList2());
                        //contactList.setItems(null);
                       // contactList.setItems(friendsList);
@@ -147,7 +150,7 @@ public class ChatUiFXMLDocumentController implements Initializable{
                        contactList.refresh();
                       //friendsList.clear();
                       //friendsList.addAll(MainControllerClient.getInstance().getFriendsList2());
-                  // }
+                   }
                    System.out.println("xxxx");
             }
         });
@@ -202,11 +205,22 @@ public class ChatUiFXMLDocumentController implements Initializable{
         vbox.getChildren().add(box);
         msgText.setText("");
         //create message
-        Message message=new Message(msg,null,null,font,hex2,0);
+        Message message=new Message(msg,MainControllerClient.getInstance().getEmail()
+                ,MainControllerClient.getInstance().getToEmail(),font,hex2,0);
         //send to server
-        //MainControllerClient.getInstance().sendMessage(new Message(msg,null,null,font,hex2));
+        MainControllerClient.getInstance().sendMessage(message);
     }
-    
+    public void appenedMsgToChat(Message msg){
+        HBox box=new HBox();
+        box.setAlignment(Pos.BASELINE_LEFT);
+        Text txt=new Text();
+        txt.setText(msg.getBody());
+        txt.setStyle("-fx-fill:"+msg.getColor()+";-fx-font-family:"+msg.getFont()+";");
+        TextFlow txtFlow=new TextFlow(txt);
+        txtFlow.getStyleClass().add("textFlowMessage");
+        box.getChildren().add(txtFlow);
+        vbox.getChildren().add(box);
+    }
     /**************************************************/
     
     //groups tab partition

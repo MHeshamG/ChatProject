@@ -66,14 +66,14 @@ public class SignUpFXMLDocumentController implements Initializable {
                 String genderType = "";
                 if(group.getSelectedToggle() != null){
                     if(maleradiobutton.isSelected() == true){
-                        genderType = "M";
+                        genderType = "m";
                     }
                     else if(femaleradiobutton.isSelected() == true){
-                        genderType = "F";
+                        genderType = "f";
                     }
                 }
                 
-                User user = new User(name.getText(),username.getText(),genderType,email.getText(),password.getText());
+                User user = new User(name.getText(),username.getText(),genderType,email.getText(),password.getText(),country.getText());
                 //hena setter equals textfields
                 //radio buttons isSelected() to check if radiobutton is checked
                // System.out.println(user.getName() + genderType);
@@ -83,7 +83,7 @@ public class SignUpFXMLDocumentController implements Initializable {
     }    
     private void createUser(User user){
         
-       // MainControllerClient.getInstance().signUp(user);
+       MainControllerClient.getInstance().signUp(user);
        goToChatScene();
     }
     
