@@ -6,6 +6,7 @@
 package chatprojectcommon;
 
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 /**
  *
@@ -13,4 +14,5 @@ import java.rmi.Remote;
  */
 public interface ClientInterface extends Remote{
     
+    public void receiveMessage(Message msg) throws RemoteException;
 }

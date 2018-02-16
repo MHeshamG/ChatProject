@@ -17,16 +17,27 @@ public class User implements Serializable{
     private  String gender;
     private  String email;
     private  String password;
-    private  String status;
+    private  int status;
     private boolean onlineStatus;
     private String profilepic;
     private String country;
+
+    
     
     public User(String name){
         this.name=name;
     }
 
-       public User(String username, String gender, String email, String status, boolean onlineStatus ,String profilePic ) {
+    public User(String name, String userName, String gender, String email, int status, boolean onlineStatus) {
+        this.name = name;
+        this.userName = userName;
+        this.gender = gender;
+        this.email = email;
+        this.status = status;
+        this.onlineStatus = onlineStatus;
+    }
+
+       public User(String username, String gender, String email, int status, boolean onlineStatus ,String profilePic ) {
         this.userName = name;
         this.gender = gender;
         this.email = email;
@@ -85,11 +96,11 @@ public class User implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
-     public String getStatus() {
+     public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -100,5 +111,11 @@ public class User implements Serializable{
     public void setOnlineStatus(boolean onlineStatus) {
         this.onlineStatus = onlineStatus;
     }
-    
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
 }
