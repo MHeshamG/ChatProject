@@ -112,5 +112,16 @@ public class UserTableOperations {
 
         return true;
     }
+    public static boolean setUserStatus(String email,char character) {
+        String query;
+
+        query = "update " + DatabaseContract.UserTableContract.tableName
+                + " set " + DatabaseContract.UserTableContract.status + "=" +"'" + character + "'" 
+                + " where " + DatabaseContract.UserTableContract.email + "=" + "'" + email + "'";
+        System.out.println(query);
+        DatabaseHandler.getInstance().update(query);
+
+        return true;
+    }
     
 }
