@@ -81,4 +81,13 @@ public class FreindTableOperations {
 
     }
 
+    public void insertFriends(String user1,String user2){
+        String query;
+               query="insert into " + DatabaseContract.FriendTableContract.tableName + " "
+                       + "values(" + UserTableOperations.getInstance().emailToId(user1) 
+                       + ","  +UserTableOperations.getInstance().emailToId(user2) + 
+                           ")";
+              System.out.println(query);
+              DatabaseHandler.getInstance().insert(query);
+    }
 }

@@ -94,6 +94,10 @@ public class MainControllerServer {
         return FreindTableOperations.getInstance().selectFriends(email);
     }
     
+    public ArrayList<User> getRequestsList(String email){
+        return RequestTableOperations.getInstance().getRequestsList(email);
+    }
+    
     public void AddRequest(String senderEmail,String receiverEmail){
         //TODO save request in database using RequetsTableOperation
         

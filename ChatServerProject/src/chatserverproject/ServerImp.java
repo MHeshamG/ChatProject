@@ -45,7 +45,7 @@ public class ServerImp extends UnicastRemoteObject implements ServerInterface {
     @Override
     public ArrayList<User> getRequestsList(String email) throws RemoteException {
 
-        return null;
+        return MainControllerServer.getInstance().getRequestsList(email);
     }
 
     @Override

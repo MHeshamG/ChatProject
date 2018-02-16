@@ -42,7 +42,7 @@ public class ChatServerProject extends Application {
     public static void main(String[] args) {
         
       //MainControllerServer.getInstance().AddRequest("esraa@", "ali@");
-      MainControllerServer.getInstance().bindService();
+      //MainControllerServer.getInstance().bindService();
       launch(args);
        
     }
