@@ -23,7 +23,9 @@ public class User implements Serializable{
     private String country;
 
     
+    public User(){
     
+    }
     public User(String name){
         this.name=name;
     }
