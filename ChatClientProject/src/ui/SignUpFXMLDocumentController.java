@@ -18,11 +18,15 @@ import javafx.scene.control.TextField;
 import chatclientproject.MainControllerClient;
 import chatprojectcommon.User;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
@@ -45,10 +49,13 @@ public class SignUpFXMLDocumentController implements Initializable {
    @FXML
    private RadioButton femaleradiobutton;
    @FXML
-   private TextField country;
-   @FXML
    private Button signupbutton;
-    
+   @FXML
+   private ChoiceBox country;
+   @FXML
+   private Button back;
+   
+   private String count;
    final ToggleGroup group = new ToggleGroup();
    
    
@@ -58,6 +65,20 @@ public class SignUpFXMLDocumentController implements Initializable {
          maleradiobutton.setToggleGroup(group);
          femaleradiobutton.setToggleGroup(group);
          maleradiobutton.setSelected(true);
+           List<java.lang.String> countries = new ArrayList<>();
+            countries.add("Egypt");
+            countries.add("France");
+            countries.add("United States");
+            country.getItems().addAll(countries);
+            country.setValue("Egypt");
+            
+         country.setOnAction(new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                 count = (String) country.getSelectionModel().getSelectedItem();
+                            
+            }
+        });   
        
          signupbutton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -66,24 +87,38 @@ public class SignUpFXMLDocumentController implements Initializable {
                 String genderType = "";
                 if(group.getSelectedToggle() != null){
                     if(maleradiobutton.isSelected() == true){
-                        genderType = "m";
+                        genderType = "M";
                     }
                     else if(femaleradiobutton.isSelected() == true){
-                        genderType = "f";
+                        genderType = "F";
                     }
                 }
                 
-                User user = new User(name.getText(),username.getText(),genderType,email.getText(),password.getText(),country.getText());
+                //User user = new User(name.getText(),username.getText(),genderType,email.getText(),password.getText());
                 //hena setter equals textfields
                 //radio buttons isSelected() to check if radiobutton is checked
                // System.out.println(user.getName() + genderType);
-                createUser(user);
+                //createUser(user);
             }
         });
+         back.setOnAction(new EventHandler<ActionEvent>() {
+             @Override
+             public void handle(ActionEvent event) {
+                 try {
+                     Stage stage = (Stage) name.getScene().getWindow();
+                     Parent root = FXMLLoader.load(getClass().getResource("/ui/SignInFXMLDocument.fxml"));
+                     Scene scene = new Scene(root,1500,800);
+                     stage.setScene(scene);
+                     stage.show();
+                 } catch (IOException ex) {
+                     Logger.getLogger(SignUpFXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+             }
+         });
     }    
     private void createUser(User user){
         
-       MainControllerClient.getInstance().signUp(user);
+       // MainControllerClient.getInstance().signUp(user);
        goToChatScene();
     }
     
