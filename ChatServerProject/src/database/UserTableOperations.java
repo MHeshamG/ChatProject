@@ -122,7 +122,8 @@ public class UserTableOperations {
 
         return true;
     }
-  public static double numberOfOnlineUsers() {
+
+    public static double numberOfOnlineUsers() {
 
         String query;
         ResultSet rs;
@@ -140,6 +141,7 @@ public class UserTableOperations {
         }
         return counter;
     }
+
     public static double numberOfOfflineUsers() {
 
         String query;
@@ -158,6 +160,61 @@ public class UserTableOperations {
         }
         return counter;
     }
-  
+
+    public static double numberOfMaleUsers() {
+
+        String query;
+        ResultSet rs;
+        double counter = 0.0;
+        query = "select count(*) AS count from " + DatabaseContract.UserTableContract.tableName
+                + " where " + DatabaseContract.UserTableContract.gender + "='m'";
+        System.out.println(query);
+        rs = DatabaseHandler.getInstance().select(query);
+        try {
+            while (rs.next()) {
+                counter = rs.getDouble("count");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserTableOperations.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return counter;
+    }
+
+    public static double numberOfFemaleUsers() {
+
+        String query;
+        ResultSet rs;
+        double counter = 0.0;
+        query = "select count(*) AS count from " + DatabaseContract.UserTableContract.tableName
+                + " where " + DatabaseContract.UserTableContract.gender + "='f'";
+        System.out.println(query);
+        rs = DatabaseHandler.getInstance().select(query);
+        try {
+            while (rs.next()) {
+                counter = rs.getDouble("count");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserTableOperations.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return counter;
+    }
+
+    public static double numberOfTotalUsers() {
+
+        String query;
+        ResultSet rs;
+        double counter = 0.0;
+        query = "select count(*) AS count from " + DatabaseContract.UserTableContract.tableName;
+        System.out.println(query);
+        rs = DatabaseHandler.getInstance().select(query);
+        try {
+            while (rs.next()) {
+                counter = rs.getDouble("count");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserTableOperations.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return counter;
+    }
 
 }
