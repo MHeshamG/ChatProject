@@ -20,7 +20,7 @@ import java.util.HashMap;
  */
 public class ServerImp extends UnicastRemoteObject implements ServerInterface {
 
-    HashMap<String, ClientInterface> usersHashMap;
+    
 
     public ServerImp() throws RemoteException {
 
@@ -37,10 +37,9 @@ public class ServerImp extends UnicastRemoteObject implements ServerInterface {
     }
 
     @Override
-    public boolean sendRequest(String senderEmail, String receiverEmail) {
+    public void sendRequest(String senderEmail, String receiverEmail) {
         //TODO save request at database requests table
         MainControllerServer.getInstance().AddRequest(senderEmail, receiverEmail);
-        return false;
     }
 
     @Override
@@ -52,12 +51,13 @@ public class ServerImp extends UnicastRemoteObject implements ServerInterface {
     @Override
     public ArrayList<User> getFriendsList(String email) throws RemoteException {
 
-        return null;
+        return MainControllerServer.getInstance().getFriendsList(email);
     }
 
     @Override
     public void sendMessage(Message msg) throws RemoteException {
         System.out.println(msg.getBody()); 
+        MainControllerServer.getInstance().sendMessage(msg);
     }
 
     @Override
@@ -78,5 +78,15 @@ public class ServerImp extends UnicastRemoteObject implements ServerInterface {
     @Override
     public void deletRequest(String senderEmail, String receiverEmail) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setOnline(String email) {
+        MainControllerServer.getInstance().setOnline(email);
+    }
+
+    @Override
+    public void register(String email,ClientInterface cc) throws RemoteException {
+        MainControllerServer.getInstance().register(email,cc);
     }
 }
