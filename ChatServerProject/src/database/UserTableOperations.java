@@ -28,35 +28,35 @@ public class UserTableOperations {
         return userTableOperationsObj;
     }
 
-    public void insertUser(User user){
+    public void insertUser(User user) {
         String query;
 
         query = "insert into " + DatabaseContract.UserTableContract.tableName + "("
-                +DatabaseContract.UserTableContract.userName
+                + DatabaseContract.UserTableContract.userName
                 + "," + DatabaseContract.UserTableContract.name
                 + "," + DatabaseContract.UserTableContract.password
                 + "," + DatabaseContract.UserTableContract.email
-                + "," + DatabaseContract.UserTableContract.gender 
-                +","+ DatabaseContract.UserTableContract.online
-                +","+ DatabaseContract.UserTableContract.status
-                +","+ DatabaseContract.UserTableContract.country
-                +") "
-                + "values("   
-                + "'" + user.getUserName() +"'"
-                + "," + "'"+ user.getName() + "'"
-                + "," + "'" +user.getPassword() + "'"
-                + "," + "'"+ user.getEmail()+"'"
-                + "," + "'" +user.getGender()+ "'"
-                +","+"'1'"
-                +","+"'0'"
-                +",'"+user.getCountry()
+                + "," + DatabaseContract.UserTableContract.gender
+                + "," + DatabaseContract.UserTableContract.online
+                + "," + DatabaseContract.UserTableContract.status
+                + "," + DatabaseContract.UserTableContract.country
+                + ") "
+                + "values("
+                + "'" + user.getUserName() + "'"
+                + "," + "'" + user.getName() + "'"
+                + "," + "'" + user.getPassword() + "'"
+                + "," + "'" + user.getEmail() + "'"
+                + "," + "'" + user.getGender() + "'"
+                + "," + "'1'"
+                + "," + "'0'"
+                + ",'" + user.getCountry()
                 + "');";
-        
+
         System.out.println(query);
         DatabaseHandler.getInstance().insert(query);
     }
 
-    public boolean selectUser(String email, String password){
+    public boolean selectUser(String email, String password) {
         String query;
         boolean checkIfExist = true;
         query = "select * from " + DatabaseContract.UserTableContract.tableName
@@ -75,13 +75,12 @@ public class UserTableOperations {
 
     }
 
-    public int emailToId(String email){
-           ResultSet rs=null;
-           
-           int res=0;
+    public int emailToId(String email) {
+        ResultSet rs = null;
+
+        int res = 0;
         try {
             String query;
-           
 
             query = "select " + DatabaseContract.UserTableContract.id
                     + " from " + DatabaseContract.UserTableContract.tableName
@@ -89,19 +88,18 @@ public class UserTableOperations {
             System.out.println(query);
 
             rs = DatabaseHandler.getInstance().select(query);
-           if(rs.next()){
-                res=rs.getInt(DatabaseContract.UserTableContract.id); 
-        }else{
-           res=-1;
-           } 
-        }
-        catch (SQLException ex) {
+            if (rs.next()) {
+                res = rs.getInt(DatabaseContract.UserTableContract.id);
+            } else {
+                res = -1;
+            }
+        } catch (SQLException ex) {
             Logger.getLogger(UserTableOperations.class.getName()).log(Level.SEVERE, null, ex);
         }
-               return res;    
+        return res;
     }
 
-    public boolean setUserOnlineStatus(String email){
+    public boolean setUserOnlineStatus(String email) {
         String query;
 
         query = "update " + DatabaseContract.UserTableContract.tableName
@@ -112,16 +110,54 @@ public class UserTableOperations {
 
         return true;
     }
-    public static boolean setUserStatus(String email,char character) {
+
+    public static boolean setUserStatus(String email, char character) {
         String query;
 
         query = "update " + DatabaseContract.UserTableContract.tableName
-                + " set " + DatabaseContract.UserTableContract.status + "=" +"'" + character + "'" 
+                + " set " + DatabaseContract.UserTableContract.status + "=" + "'" + character + "'"
                 + " where " + DatabaseContract.UserTableContract.email + "=" + "'" + email + "'";
         System.out.println(query);
         DatabaseHandler.getInstance().update(query);
 
         return true;
     }
-    
+  public static double numberOfOnlineUsers() {
+
+        String query;
+        ResultSet rs;
+        double counter = 0.0;
+        query = "select count(*) AS count from " + DatabaseContract.UserTableContract.tableName
+                + " where " + DatabaseContract.UserTableContract.online + "='1'";
+        System.out.println(query);
+        rs = DatabaseHandler.getInstance().select(query);
+        try {
+            while (rs.next()) {
+                counter = rs.getDouble("count");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserTableOperations.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return counter;
+    }
+    public static double numberOfOfflineUsers() {
+
+        String query;
+        ResultSet rs;
+        double counter = 0.0;
+        query = "select count(*) AS count from " + DatabaseContract.UserTableContract.tableName
+                + " where " + DatabaseContract.UserTableContract.online + "='0'";
+        System.out.println(query);
+        rs = DatabaseHandler.getInstance().select(query);
+        try {
+            while (rs.next()) {
+                counter = rs.getDouble("count");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserTableOperations.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return counter;
+    }
+  
+
 }
