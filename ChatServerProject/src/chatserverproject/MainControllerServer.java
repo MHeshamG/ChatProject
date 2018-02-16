@@ -11,6 +11,8 @@ import chatprojectcommon.User;
 import database.FreindTableOperations;
 import database.RequestTableOperations;
 import database.UserTableOperations;
+import java.rmi.AccessException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.activation.Activatable;
 import java.rmi.registry.LocateRegistry;
@@ -28,9 +30,16 @@ public class MainControllerServer {
     
     private static MainControllerServer mainControllerServerObj;
     private HashMap<String, ClientInterface> usersHashMap;
-    
+     ServerImp obj;
+     Registry reg;
     private MainControllerServer(){
-        usersHashMap=new HashMap<>();
+        try {
+            usersHashMap=new HashMap<>();
+            obj = new ServerImp();
+            reg = LocateRegistry.createRegistry(2090);
+        } catch (RemoteException ex) {
+            Logger.getLogger(MainControllerServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public static MainControllerServer getInstance(){
@@ -43,15 +52,25 @@ public class MainControllerServer {
     
     public void bindService(){
         try{
-        ServerImp obj = new ServerImp();
-        Registry reg = LocateRegistry.createRegistry(2090);
+        
         reg.rebind("service", obj);
         }
         catch(RemoteException ex){ 
             ex.printStackTrace();
         }    
     }
-    
+     public void unbindService(){
+        try{
+         
+            
+        reg.unbind("service");
+        }
+        catch(RemoteException ex){ 
+            ex.printStackTrace();
+        } catch (NotBoundException ex) {
+            Logger.getLogger(MainControllerServer.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+    }
     public void signup(User user){
         UserTableOperations.getInstance().insertUser(user);
         //System.out.println(user.getEmail());

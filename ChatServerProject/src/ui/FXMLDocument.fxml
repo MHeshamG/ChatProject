@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.FXMLDocumentController">
-    <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
-    </children>
-</AnchorPane>
+<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="317.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.FXMLDocumentController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #253241;">
+         <children>
+            <Button fx:id="start" layoutX="36.0" layoutY="49.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" style="-fx-background-radius: 15;" text="Start">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Button fx:id="stop" layoutX="36.0" layoutY="99.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" style="-fx-background-radius: 15;" text="Stop">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Button fx:id="viewusers" layoutX="36.0" layoutY="152.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" style="-fx-background-radius: 15;" text="View  Users">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Button fx:id="statistics" layoutX="36.0" layoutY="208.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" style="-fx-background-radius: 15;" text="View Statistics">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+         </children></AnchorPane>
+    <AnchorPane fx:id="whiteanchorpane" minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="417.0" style="-fx-background-color: ;" />
+  </items>
+</SplitPane>
