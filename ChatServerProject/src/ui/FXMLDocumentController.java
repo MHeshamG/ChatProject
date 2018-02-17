@@ -21,7 +21,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -43,6 +46,8 @@ public class FXMLDocumentController implements Initializable {
     private Button statistics;
     @FXML
     private AnchorPane whiteanchorpane;
+    @FXML
+    private Button sendannouncment;
     
     private int numberofonline = 3;
     private int numberofoffline = 6;
@@ -52,6 +57,14 @@ public class FXMLDocumentController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 whiteanchorpane.getChildren().clear();
+                Text start = new Text();
+                start.setFont(new Font(20));
+                start.setWrappingWidth(200);
+                start.setLayoutX(20);
+                start.setLayoutY(20);
+                start.setTextAlignment(TextAlignment.JUSTIFY);
+                start.setText("Service is now open");
+                whiteanchorpane.getChildren().add(start);
                 System.out.println("service is now open");
                 MainControllerServer.getInstance().bindService();
                 }
@@ -60,6 +73,14 @@ public class FXMLDocumentController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 whiteanchorpane.getChildren().clear();
+                Text stop = new Text();
+                stop.setFont(new Font(20));
+                stop.setWrappingWidth(200);
+                stop.setLayoutX(20);
+                stop.setLayoutY(20);
+                stop.setTextAlignment(TextAlignment.JUSTIFY);
+                stop.setText("Service is now closed");
+                whiteanchorpane.getChildren().add(stop);
                 System.out.println("service is now closed");
                 MainControllerServer.getInstance().unbindService();
                 }
@@ -137,6 +158,28 @@ public class FXMLDocumentController implements Initializable {
                 
                 chart.setData(data);
                 whiteanchorpane.getChildren().addAll(chart);
+            }
+        });
+        sendannouncment.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                whiteanchorpane.getChildren().clear();
+                TextField announce = new TextField();
+                announce.setPromptText("Type your announcment then press enter");
+                announce.setPrefColumnCount(30);
+                announce.setLayoutX(25);
+                announce.setLayoutY(40);
+                whiteanchorpane.getChildren().add(announce);
+                announce.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent event) {
+                        if (event.getCode().equals(KeyCode.ENTER)){
+                            String ann = announce.getText();
+                            MainControllerServer.getInstance().sendAnnouncement(ann);
+                       
+                        }
+                    }
+                });
             }
         });
         

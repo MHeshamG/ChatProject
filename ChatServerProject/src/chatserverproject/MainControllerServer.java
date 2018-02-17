@@ -19,6 +19,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,8 +32,8 @@ public class MainControllerServer {
     
     private static MainControllerServer mainControllerServerObj;
     private HashMap<String, ClientInterface> usersHashMap;
-     ServerImp obj;
-     Registry reg;
+    ServerImp obj;
+    Registry reg;
     private MainControllerServer(){
         try {
             usersHashMap=new HashMap<>();
@@ -111,5 +113,22 @@ public class MainControllerServer {
         } catch (RemoteException ex) {
             Logger.getLogger(MainControllerServer.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public void sendAnnouncement(String announce){
+         /*Iterator it = usersHashMap.entrySet().iterator();
+          while (it.hasNext()){
+            Map.Entry pair = (Map.Entry)it.next();
+            pair.getValue().receiveAnnouncment(announce);
+            it.remove(); // avoids a ConcurrentModificationException
+    }*/
+         for (ClientInterface client : usersHashMap.values()) {
+             try {
+                 // ...
+                 client.receiveAnnouncment(announce);
+             } catch (RemoteException ex) {
+                 Logger.getLogger(MainControllerServer.class.getName()).log(Level.SEVERE, null, ex);
+             }
+            }
+        
     }
 }
