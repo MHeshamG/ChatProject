@@ -15,4 +15,5 @@ import java.rmi.RemoteException;
 public interface ClientInterface extends Remote{
     
     public void receiveMessage(Message msg) throws RemoteException;
+    public void receiveAnnouncment(String announ) throws RemoteException;
 }
