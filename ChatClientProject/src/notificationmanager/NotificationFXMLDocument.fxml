@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorepane" opacity="0.99" prefHeight="208.0" prefWidth="500.0" style="-fx-background-color: #253241;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="notificationmanager.NotificationFXMLDocumentController">
+   <children>
+      <Text fx:id="textheader" fill="WHITE" layoutX="229.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="187.0">
+         <font>
+            <Font size="31.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Text>
+      <Text fx:id="textbody" layoutX="229.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="161.13671875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="image" fitHeight="150.0" fitWidth="149.0" layoutX="14.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <effect>
+      <DropShadow />
+   </effect>
+</AnchorPane>
