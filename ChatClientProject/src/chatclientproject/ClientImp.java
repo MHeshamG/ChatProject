@@ -26,6 +26,11 @@ public class ClientImp extends UnicastRemoteObject implements ClientInterface{
         System.out.println("rec:"+msg.getBody());
         MainControllerClient.getInstance().appenedMsgToChat(msg);
     }
-    
+    @Override
+     public void receiveAnnouncment(String announ) throws RemoteException{
+         System.out.println("announ" + announ);
+     
+     }
+
     
 }
