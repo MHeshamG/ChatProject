@@ -5,6 +5,7 @@
  */
 package ui;
 
+import chatclientproject.MainControllerClient;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,17 +29,17 @@ import javafx.stage.Stage;
  * @author DR Gamal
  */
 public class RequestListFXMLDocumentController implements Initializable {
-    
+
     private Stage stage;
     @FXML
     private Text userName;
-    
+
     @FXML
     AnchorPane listItem;
-    
+
     @FXML
     Circle profilePicCircle;
-    
+
     @FXML
     private Button accept;
     @FXML
@@ -46,7 +47,8 @@ public class RequestListFXMLDocumentController implements Initializable {
     @FXML
     private Label label;
     
-    
+    private String email;
+
     /**
      * Initializes the controller class.
      */
@@ -56,33 +58,39 @@ public class RequestListFXMLDocumentController implements Initializable {
         accept.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                accept.setStyle("-fx-background-color: transparent;");
-                accept.setText("");
-                ignore.setStyle("-fx-background-color: transparent;");
-                ignore.setText("");
-                label.setText("The request is accepted");
+                setLabel("The request is accepted");
+                MainControllerClient.getInstance().confirmRequest(email);
             }
         });
         ignore.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                accept.setStyle("-fx-background-color: transparent;");
-                accept.setText("");
-                ignore.setStyle("-fx-background-color: transparent;");
-                ignore.setText("");
-                label.setText("The request is ignored");
+                setLabel("The request is ignored");
             }
         });
-    } 
-    public void setProfilePic(File fileImage){
-        if(fileImage!=null){
-        Image img=new Image("file:"+fileImage.getAbsolutePath());
-        ImagePattern imagePattern= new ImagePattern(img);
-        profilePicCircle.setFill(imagePattern);
+    }
+
+    public void setProfilePic(File fileImage) {
+        if (fileImage != null) {
+            Image img = new Image("file:" + fileImage.getAbsolutePath());
+            ImagePattern imagePattern = new ImagePattern(img);
+            profilePicCircle.setFill(imagePattern);
         }
     }
-    public void setUserName(String name){
+
+    public void setUserName(String name) {
         userName.setText(name);
     }
-    
+
+    private void setLabel(String label1) {
+        accept.setStyle("-fx-background-color: transparent;");
+        accept.setText("");
+        ignore.setStyle("-fx-background-color: transparent;");
+        ignore.setText("");
+        label.setText(label1);
+        label.setStyle("-fx-text-fill:#ffffff;");
+    }
+    public void setEmail(String email){
+        this.email=email;
+    }
 }

@@ -59,6 +59,7 @@ public class CustomRequestListFactory implements Callback<ListView<User>,ListCel
                 listItemController.setProfilePic(new File("src/imgs/male.jpg"));
             
             listItemController.setUserName(user.getUserName());
+            listItemController.setEmail(user.getEmail());
             
             } catch (IOException ex) {
                 Logger.getLogger(CustomListFactory.class.getName()).log(Level.SEVERE, null, ex);

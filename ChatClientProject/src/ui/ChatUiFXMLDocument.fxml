@@ -20,7 +20,7 @@
                     <content>
                         <AnchorPane layoutY="0.0" minHeight="0.0" minWidth="0.0" prefHeight="788.0" prefWidth="498.0" style="-fx-background-color: #253241;">
                             <children>
-                                <ListView fx:id="contactList" layoutY="60.0" prefHeight="690.0" prefWidth="498.0" />
+                                <ListView fx:id="contactList" layoutY="60.0" prefHeight="690.0" prefWidth="498.0" styleClass="mylist-view" />
                                 <ImageView fitHeight="50.0" fitWidth="65.0" layoutX="0.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="/imgs/add_freind_icon.png" />
@@ -45,9 +45,9 @@
                 </Tab>
                 <Tab text="Requests">
                     <content>
-                         <AnchorPane layoutY="50.0" minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="498.0" style="-fx-background-color: #253241;">
+                         <AnchorPane layoutX="10.0" layoutY="0.0" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="498.0" style="-fx-background-color: #ff0000;">
                             <children>
-                                <ListView fx:id="requestList" layoutY="0.0" prefHeight="690.0" prefWidth="498.0" />
+                                <ListView fx:id="requestList" layoutY="51.0" prefHeight="639.0" prefWidth="498.0" />
                             </children>
                          </AnchorPane>
                     </content>

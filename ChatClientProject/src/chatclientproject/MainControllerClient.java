@@ -33,7 +33,7 @@ public class MainControllerClient {
     private ChatUiFXMLDocumentController chatUiController;
     private HashMap<String,ChatObj> chats; //represents the chats between individuals and groups
     private ClientImp cc;
-    private String toEmail;
+    private String toEmail;// who am i chatting
 
     
     
@@ -182,5 +182,13 @@ public class MainControllerClient {
             Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+    
+    public void confirmRequest(String recieverEmail){
+        try {
+            server.confirmRequest(email, recieverEmail);
+        } catch (RemoteException ex) {
+            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

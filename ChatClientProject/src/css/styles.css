@@ -13,10 +13,10 @@
     -fx-border-color: #ffffff;*/
 }
 
-.list-view .list-cell:focused{
+.mylist-view .list-cell:focused{
     -fx-background-color:#6f14dd;
 }
-.list-view .list-cell:hover{
+.mylist-view .list-cell:hover{
     -fx-background-color:#4c6175;
 }
 .background{
