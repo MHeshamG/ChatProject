@@ -21,7 +21,9 @@ public class User implements Serializable{
     private boolean onlineStatus;
     private String profilepic;
     private String country;
+    
 
+    
     
     public User(){
     

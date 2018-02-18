@@ -20,12 +20,16 @@ public interface ServerInterface extends Remote {
     public void setOnline(String email)throws RemoteException;
     
     public void sendMessage(Message msg)throws RemoteException;
-    public boolean requestToSendFile(String fileName,String to) throws RemoteException;
-    public void sendMessageFile(byte[] data,int offset,int len,String fileName)throws RemoteException;
+    public void sendMessageFile(byte[] data,int offset,int len,String from,String to,String fileName)throws RemoteException;
     
-    public void sendRequest(String senderEmail,String receiverEmail) throws RemoteException;
+   
+    
+    public boolean sendRequest(String senderEmail,String receiverEmail) throws RemoteException;
     public void confirmRequest(String senderEmail,String receiverEmail) throws RemoteException;
     public void deletRequest(String senderEmail,String receiverEmail) throws RemoteException;
     public ArrayList<User> getRequestsList(String email)throws RemoteException;
     public ArrayList<User> getFriendsList(String email) throws RemoteException;
+    
+    public void sendGroup(GroupMsg g)throws RemoteException;
+    public void sendMessageToGroup(String groupName,Message msg) throws RemoteException;
 }

@@ -14,10 +14,11 @@ import java.util.ArrayList;
  */
 public class GroupMsg implements Serializable{
     
-    private ArrayList<User> members;
+    private ArrayList<String> members;
     private String groupName;
     
     public GroupMsg(String groupName){
+        members=new ArrayList<>();
         this.groupName=groupName;
     }
 
@@ -31,11 +32,11 @@ public class GroupMsg implements Serializable{
     
     
     
-    public void addToMembers(User user){
+    public void addToMembers(String user){
         members.add(user);
     }
     
-    public ArrayList<User> getMembers(){
+    public ArrayList<String> getMembers(){
         return members;
     }
 }
