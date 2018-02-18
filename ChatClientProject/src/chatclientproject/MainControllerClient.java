@@ -324,4 +324,12 @@ public class MainControllerClient {
             Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public void receiveAnn(String Ann){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                new Alert(Alert.AlertType.INFORMATION,"Server Message "+Ann).showAndWait();
+            }
+        });
+    }
 }

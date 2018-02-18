@@ -35,8 +35,8 @@ public class ClientImp extends UnicastRemoteObject implements ClientInterface{
     }
     @Override
      public void receiveAnnouncment(String announ) throws RemoteException{
-         System.out.println("announ" + announ);
-     
+         //System.out.println("announ" + announ);
+         MainControllerClient.getInstance().receiveAnn(announ);
      }
 
     @Override
