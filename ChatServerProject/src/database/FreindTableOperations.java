@@ -83,7 +83,9 @@ public class FreindTableOperations {
 
     public void insertFriends(String user1,String user2){
         String query;
-               query="insert into " + DatabaseContract.FriendTableContract.tableName + " "
+               query="insert into " + DatabaseContract.FriendTableContract.tableName + " ("
+                       +DatabaseContract.FriendTableContract.userId+" , "
+                       +DatabaseContract.FriendTableContract.friendId+")"
                        + "values(" + UserTableOperations.getInstance().emailToId(user1) 
                        + ","  +UserTableOperations.getInstance().emailToId(user2) + 
                            ")";

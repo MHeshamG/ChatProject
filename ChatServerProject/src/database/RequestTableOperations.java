@@ -20,8 +20,9 @@ public class RequestTableOperations {
         return requestTableOperations;
     }
     
-    public void sendRequest (String senderEmail, String recieverEmail){
+    public boolean sendRequest (String senderEmail, String recieverEmail){
          
+            boolean result=true;
             //String query;
             String query2;
             int senderId=0;
@@ -52,15 +53,16 @@ public class RequestTableOperations {
             }
             else
             {
-                System.out.println("not a user");
+                result=false;
             }
+            return result;
        }
     
     
     
     public void comfirmRequest(String senderEmail, String recieverEmail)
     {
-             FreindTableOperations.getInstance().insertFriends(senderEmail, senderEmail);
+             FreindTableOperations.getInstance().insertFriends(senderEmail, recieverEmail);
              deleteRequest(senderEmail, recieverEmail);
     }
     
@@ -86,7 +88,7 @@ public class RequestTableOperations {
             String query;
             query="select * from "+DatabaseContract.UserTableContract.tableName
                     + " where "+DatabaseContract.UserTableContract.id+  " in ("
-                    +"select recieverId from requests where "+DatabaseContract.RequesttableContract.senderId+"="+userId+");";
+                    +"select senderId from requests where "+DatabaseContract.RequesttableContract.recieverId+"="+userId+");";
             
             System.out.println(query);
             ResultSet rs=DatabaseHandler.getInstance().select(query);

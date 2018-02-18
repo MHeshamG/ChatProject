@@ -6,11 +6,15 @@
 package chatserverproject;
 
 import chatprojectcommon.ClientInterface;
+import chatprojectcommon.GroupMsg;
 import chatprojectcommon.Message;
 import chatprojectcommon.User;
 import database.FreindTableOperations;
 import database.RequestTableOperations;
 import database.UserTableOperations;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.rmi.AccessException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -32,11 +36,13 @@ public class MainControllerServer {
     
     private static MainControllerServer mainControllerServerObj;
     private HashMap<String, ClientInterface> usersHashMap;
+    private HashMap<String,GroupMsg> groupsHashMap;
     ServerImp obj;
     Registry reg;
     private MainControllerServer(){
         try {
             usersHashMap=new HashMap<>();
+            groupsHashMap=new HashMap<>();
             obj = new ServerImp();
             reg = LocateRegistry.createRegistry(2090);
         } catch (RemoteException ex) {
@@ -100,27 +106,31 @@ public class MainControllerServer {
         return RequestTableOperations.getInstance().getRequestsList(email);
     }
     
-    public void AddRequest(String senderEmail,String receiverEmail){
+    public boolean AddRequest(String senderEmail,String receiverEmail){
         //TODO save request in database using RequetsTableOperation
         
-        RequestTableOperations.getInstance().sendRequest(senderEmail, receiverEmail);
+        return RequestTableOperations.getInstance().sendRequest(senderEmail, receiverEmail);
         //System.out.println(senderEmail+" , "+receiverEmail);
+    }
+    
+    public void addFriends(String senderEmail, String recieverEmail){
+        RequestTableOperations.getInstance().comfirmRequest(senderEmail, recieverEmail);
+    }
+    
+    public void deleteRequest(String senderEmail,String recieverEmail){
+        RequestTableOperations.getInstance().deleteRequest(senderEmail, recieverEmail);
     }
     
     public void sendMessage(Message msg){
         try {
-            usersHashMap.get(msg.getTo()).receiveMessage(msg);
+            System.out.println(msg.getTo());
+            if(usersHashMap.get(msg.getTo())!=null)
+                usersHashMap.get(msg.getTo()).receiveMessage(msg);
         } catch (RemoteException ex) {
             Logger.getLogger(MainControllerServer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public void sendAnnouncement(String announce){
-         /*Iterator it = usersHashMap.entrySet().iterator();
-          while (it.hasNext()){
-            Map.Entry pair = (Map.Entry)it.next();
-            pair.getValue().receiveAnnouncment(announce);
-            it.remove(); // avoids a ConcurrentModificationException
-    }*/
          for (ClientInterface client : usersHashMap.values()) {
              try {
                  // ...
@@ -130,5 +140,35 @@ public class MainControllerServer {
              }
             }
         
+    }
+    
+    public void sendFile(byte[] data, int offset, int len,String from,String to, String fileName){
+        try {
+            System.out.println(from+" "+to);
+            if(usersHashMap.get(to)!=null)
+                usersHashMap.get(to).reciveFile(data, offset,  len,from, fileName);
+        } catch (RemoteException ex) {
+            Logger.getLogger(MainControllerServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+}
+    public void addGroup(GroupMsg g){
+        groupsHashMap.put(g.getGroupName(), g);
+        System.out.println(g.getGroupName());
+        for (String object : g.getMembers()) {
+            System.out.println(object);
+        }
+    }
+    
+    public void sendMessageToGroup(String groupName,Message msg){
+        System.out.println(groupName);
+        System.out.println(msg);
+        for (String object : groupsHashMap.get(groupName).getMembers()) {
+            try {
+                usersHashMap.get(object).receiveMessageGroup(msg);
+            } catch (RemoteException ex) {
+                Logger.getLogger(MainControllerServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }
