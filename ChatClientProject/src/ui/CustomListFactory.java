@@ -68,6 +68,8 @@ public class CustomListFactory implements Callback<ListView<User>,ListCell<User>
             
             listItemController.setUserName(user.getUserName());
             
+            
+            
             switch(user.getStatus()){
                 case 0:
                     listItemController.setStatus("Available");
@@ -82,7 +84,12 @@ public class CustomListFactory implements Callback<ListView<User>,ListCell<User>
             listItem.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    MainControllerClient.getInstance().setToEmail(user.getEmail());
+                   MainControllerClient.getInstance().setToEmail(user.getEmail());
+                   MainControllerClient.getInstance().createChatObj(user.getEmail());
+                   MainControllerClient.getInstance().setFriendChattingName("Talking to:  "+user.getUserName());
+                    MainControllerClient.getInstance().clearVbox();
+                   MainControllerClient.getInstance().renderMessagesToUi(user.getEmail());
+                  
                 }
             });
             } catch (IOException ex) {

@@ -11,6 +11,7 @@
     -fx-background-color:#253241;
     /*-fx-border-width: 0 0 1 0;
     -fx-border-color: #ffffff;*/
+    -fx-text-fill: #ffffff;
 }
 
 .mylist-view .list-cell:focused{

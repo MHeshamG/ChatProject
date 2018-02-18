@@ -19,5 +19,6 @@
       </Text>
       <Text fx:id="statusText" fill="WHITE" layoutX="105.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available" />
       <Circle fx:id="onlineCircle" fill="#08f478" layoutX="86.0" layoutY="79.0" radius="8.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
+      <Text fx:id="newMessage" fill="WHITE" layoutX="243.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>

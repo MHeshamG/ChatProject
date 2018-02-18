@@ -44,6 +44,9 @@ public class ListItemFXMLDocumentController implements Initializable {
     @FXML
     Circle onlineCircle;
     
+    @FXML
+    Text newMessage;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -78,4 +81,6 @@ public class ListItemFXMLDocumentController implements Initializable {
     public void setUserName(String name){
         userName.setText(name);
     }
+    
+    
 }

@@ -45,9 +45,9 @@
                 </Tab>
                 <Tab text="Requests">
                     <content>
-                         <AnchorPane layoutX="10.0" layoutY="0.0" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="498.0" style="-fx-background-color: #ff0000;">
+                         <AnchorPane layoutY="40.0" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="498.0" style="-fx-background-color: transparent;">
                             <children>
-                                <ListView fx:id="requestList" layoutY="51.0" prefHeight="639.0" prefWidth="498.0" />
+                                <ListView fx:id="requestList" layoutY="40.0" prefHeight="700.0" prefWidth="498.0" />
                             </children>
                          </AnchorPane>
                     </content>
@@ -56,7 +56,7 @@
                     <content>
                         <AnchorPane layoutY="0.0" minHeight="0.0" minWidth="0.0" prefHeight="788.0" prefWidth="498.0" style="-fx-background-color: #253241;">
                             <children>
-                                <ListView fx:id="contactListCreateGroup" layoutY="130.0" prefHeight="690.0" prefWidth="498.0" />
+                                <ListView fx:id="contactListCreateGroup" layoutY="185.0" prefHeight="635.0" prefWidth="498.0" />
                                 <JFXTextField fx:id="GroupNameTextField" focusColor="#ffffff" layoutX="9.0" layoutY="0.0" prefHeight="51.0" prefWidth="480.0" promptText="Group Name" style="-fx-text-fill:#ffffff;">
                                     <font>
                                         <Font size="24.0" />
@@ -71,7 +71,7 @@
                                         </LinearGradient>
                                     </unFocusColor>
                                 </JFXTextField>
-                        <JFXTextField fx:id="AddMemberTextField" focusColor="WHITE" layoutX="59.0" layoutY="71.0" prefHeight="51.0" prefWidth="380.0" promptText="Add Member">
+                        <JFXTextField fx:id="AddMemberTextField" focusColor="WHITE" layoutX="59.0" layoutY="71.0" prefHeight="51.0" prefWidth="380.0" promptText="Add Member" style="-fx-text-fill:#ffffff;">
                            <unFocusColor>
                               <LinearGradient endX="1.0" endY="1.0">
                                  <stops>
@@ -83,7 +83,8 @@
                            <font>
                               <Font size="24.0" />
                            </font>
-                        </JFXTextField> 
+                        </JFXTextField>
+                        <Button fx:id="createGroupButton" layoutX="219.0" layoutY="148.0" mnemonicParsing="false" style="-fx-background-color: #6407ea;" text="create" textFill="WHITE" /> 
                             </children>
                         </AnchorPane>
                     </content>
@@ -95,9 +96,14 @@
         <!--right part-->
         <AnchorPane layoutX="498.0" prefHeight="750.0" prefWidth="749.0" style="-fx-background-color: #ffffff;">
             <children>
-                <ScrollPane layoutX="2.0" layoutY="70.0" prefHeight="670.0" prefWidth="745.0" style="-fx-background-color: #ffffff;">
+                <Text fx:id="friendChattingText" fill="#6f14dd" layoutX="20.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Talking to: none">
+               <font>
+                  <Font size="18.0" />
+               </font></Text>
+   
+                <ScrollPane layoutX="2.0" layoutY="90.0" prefHeight="650.0" prefWidth="735.0" style="-fx-background-color: #ffffff;">
                     <content>
-                        <VBox fx:id="vbox" layoutX="0.0" prefHeight="650.0" prefWidth="720.0" style="-fx-background-color: #ffffff; -fx-padding:0px 10px;">
+                        <VBox fx:id="vbox" layoutX="0.0" prefHeight="630.0" prefWidth="720.0" style="-fx-background-color: #ffffff; -fx-padding:0px 10px;">
                             <children>
                                 
                             </children>

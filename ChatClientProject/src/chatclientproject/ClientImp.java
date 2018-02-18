@@ -7,8 +7,13 @@ package chatclientproject;
 
 import chatprojectcommon.ClientInterface;
 import chatprojectcommon.Message;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,7 +29,9 @@ public class ClientImp extends UnicastRemoteObject implements ClientInterface{
     @Override
     public void receiveMessage(Message msg) throws RemoteException {
         System.out.println("rec:"+msg.getBody());
-        MainControllerClient.getInstance().appenedMsgToChat(msg);
+       // MainControllerClient.getInstance().appenedMsgToChat(msg);
+       MainControllerClient.getInstance().createChatObj(msg.getFrom());
+       MainControllerClient.getInstance().appenedReceivedMessageToChatObj(msg);
     }
     @Override
      public void receiveAnnouncment(String announ) throws RemoteException{
@@ -32,5 +39,22 @@ public class ClientImp extends UnicastRemoteObject implements ClientInterface{
      
      }
 
+    @Override
+    public void reciveFile(byte[] data, int offset, int len, String from, String fileName) throws RemoteException {
+         try {
+            FileOutputStream output=new FileOutputStream("src/received_files/"+fileName,true);
+            output.write(data,offset,len);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ClientImp.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ClientImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    @Override
+    public void receiveMessageGroup(Message msg) throws RemoteException {
+        MainControllerClient.getInstance().appenedMsgToChat(msg);
+    }
+    }
     
-}

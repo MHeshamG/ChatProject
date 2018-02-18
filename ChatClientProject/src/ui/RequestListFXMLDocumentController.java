@@ -65,6 +65,7 @@ public class RequestListFXMLDocumentController implements Initializable {
         ignore.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                MainControllerClient.getInstance().deleteRequest(email);
                 setLabel("The request is ignored");
             }
         });
