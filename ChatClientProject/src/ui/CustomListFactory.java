@@ -84,11 +84,16 @@ public class CustomListFactory implements Callback<ListView<User>,ListCell<User>
             listItem.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
+                    if(user.isOnlineStatus()){
                    MainControllerClient.getInstance().setToEmail(user.getEmail());
                    MainControllerClient.getInstance().createChatObj(user.getEmail());
                    MainControllerClient.getInstance().setFriendChattingName("Talking to:  "+user.getUserName());
                     MainControllerClient.getInstance().clearVbox();
                    MainControllerClient.getInstance().renderMessagesToUi(user.getEmail());
+                    }
+                    else{
+                        
+                    }
                   
                 }
             });

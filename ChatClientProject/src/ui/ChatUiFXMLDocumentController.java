@@ -92,6 +92,8 @@ public class ChatUiFXMLDocumentController implements Initializable {
         //test Notification
 //        NotificationHandler.getInstance().shOwNewMessageNotification("hello");
         vbox.setSpacing(8);
+        
+        
 
         /**
          * ***********************************************
@@ -318,11 +320,12 @@ public class ChatUiFXMLDocumentController implements Initializable {
                             public ListCell<GroupMsg> call(ListView<GroupMsg> param) {
                                 return new ListCell<GroupMsg>() {
                                     @Override
+                                    
                                     protected void updateItem(GroupMsg item, boolean empty) {
                                         super.updateItem(item, empty); //To change body of generated methods, choose Tools | Templates.
                                         if (item != null && !empty) {
                                             Text text = new Text(item.getGroupName());
-                                            text.setStyle("-fx-text-fill:#ffffff;");
+                                            text.setStyle("-fx-fill:#ffffff;");
                                             text.setOnMouseClicked(new EventHandler<MouseEvent>() {
                                                 @Override
                                                 public void handle(MouseEvent event) {
