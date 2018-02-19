@@ -18,4 +18,5 @@ public interface ClientInterface extends Remote{
     public void receiveAnnouncment(String announ) throws RemoteException;
     public void reciveFile(byte []data, int offset, int len,String from, String fileName) throws RemoteException;
     public void receiveMessageGroup(Message msg)throws RemoteException;
+    public void receiveGroup(GroupMsg g)throws RemoteException;
 }

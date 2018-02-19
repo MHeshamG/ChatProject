@@ -14,8 +14,9 @@ import java.util.ArrayList;
  * @author mohamed hesham
  */
 public interface ServerInterface extends Remote {
-    public void signup(User user) throws RemoteException;
+    public boolean signup(User user) throws RemoteException;
     public boolean login(String email,String password) throws RemoteException;
+    public void logout(String email) throws RemoteException;
     public void register(String email,ClientInterface cc) throws RemoteException;
     public void setOnline(String email)throws RemoteException;
     
@@ -30,6 +31,8 @@ public interface ServerInterface extends Remote {
     public ArrayList<User> getRequestsList(String email)throws RemoteException;
     public ArrayList<User> getFriendsList(String email) throws RemoteException;
     
-    public void sendGroup(GroupMsg g)throws RemoteException;
-    public void sendMessageToGroup(String groupName,Message msg) throws RemoteException;
+    public void sendGroup(String email,GroupMsg g)throws RemoteException;
+    public void sendMessageToGroup(String email,String groupName,Message msg) throws RemoteException;
+    
+    public void end(String email) throws RemoteException;
 }
