@@ -10,6 +10,7 @@ import chatprojectcommon.GroupMsg;
 import chatprojectcommon.Message;
 import chatprojectcommon.ServerInterface;
 import chatprojectcommon.User;
+import database.UserTableOperations;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -33,8 +34,8 @@ public class ServerImp extends UnicastRemoteObject implements ServerInterface {
     }
 
     @Override
-    public void signup(User user) throws RemoteException {
-        MainControllerServer.getInstance().signup(user);
+    public boolean signup(User user) throws RemoteException {
+       return MainControllerServer.getInstance().signup(user);
     }
 
     @Override
@@ -94,13 +95,24 @@ public class ServerImp extends UnicastRemoteObject implements ServerInterface {
     }
 
     @Override
-    public void sendGroup(GroupMsg g) throws RemoteException {
-        MainControllerServer.getInstance().addGroup(g);
+   public void sendGroup(String email,GroupMsg g)throws RemoteException {
+        MainControllerServer.getInstance().addGroup(email,g);
     }
 
     @Override
-    public void sendMessageToGroup(String groupName,Message msg) throws RemoteException {
-        MainControllerServer.getInstance().sendMessageToGroup(groupName,msg);
+    public void sendMessageToGroup(String email,String groupName,Message msg) throws RemoteException {
+        MainControllerServer.getInstance().sendMessageToGroup(email,groupName,msg);
+    }
+
+    @Override
+    public void logout(String email) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void end(String email) throws RemoteException {
+        
+        MainControllerServer.getInstance().end(email);
     }
 
    

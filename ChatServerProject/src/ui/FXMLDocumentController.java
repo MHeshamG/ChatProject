@@ -7,11 +7,17 @@ package ui;
 
 import chatserverproject.MainControllerServer;
 import com.sun.javafx.charts.ChartLayoutAnimator;
+import database.UserTableOperations;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -51,6 +57,13 @@ public class FXMLDocumentController implements Initializable {
     
     private int numberofonline = 3;
     private int numberofoffline = 6;
+    //IntegerProperty first = new SimpleIntegerProperty(1);
+    //IntegerProperty second = new SimpleIntegerProperty(1);
+    DoubleProperty female = new SimpleDoubleProperty(UserTableOperations.getInstance().numberOfFemaleUsers());
+    DoubleProperty male = new SimpleDoubleProperty(UserTableOperations.getInstance().numberOfMaleUsers());
+    DoubleProperty onlineusers = new SimpleDoubleProperty(UserTableOperations.getInstance().numberOfOnlineUsers());
+    DoubleProperty offlineusers = new SimpleDoubleProperty(UserTableOperations.getInstance().numberOfOfflineUsers());
+    
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         start.setOnAction(new EventHandler<ActionEvent>() {
@@ -88,7 +101,7 @@ public class FXMLDocumentController implements Initializable {
         viewusers.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                whiteanchorpane.getChildren().clear();
+    /*            whiteanchorpane.getChildren().clear();
                 Text total = new Text();
                 Text totalnum = new Text();
                 Text offlineusers = new Text();
@@ -142,21 +155,87 @@ public class FXMLDocumentController implements Initializable {
                 onlineusers.setTextAlignment(TextAlignment.JUSTIFY);
                 onlineusers.setText(Integer.toString(numberofonline));
                 whiteanchorpane.getChildren().addAll(total,totalnum,offlineWord,offlineusers,onlineWord,onlineusers);
+      */
+                 whiteanchorpane.getChildren().clear();
+                PieChart chart = new PieChart();
+               /* Double noofusers = UserTableOperations.getInstance().numberOfOnlineUsers();
+                Double noofuserson = UserTableOperations.getInstance().numberOfOfflineUsers();
+                Double noofuserss = UserTableOperations.getInstance().numberOfFemaleUsers();
+                Double nodd = UserTableOperations.getInstance().numberOfMaleUsers();
+                Double nfd = UserTableOperations.getInstance().numberOfTotalUsers();
+                System.out.println("online" + noofusers + " offline" + noofuserson + "females "+ noofuserss + " males " + nodd + "total "+ nfd);
+*/              
+               PieChart.Data pie = new PieChart.Data("online",UserTableOperations.getInstance().numberOfOnlineUsers());
+               pie.pieValueProperty().bind(onlineusers);
+               PieChart.Data pie2 = new PieChart.Data("offline",UserTableOperations.getInstance().numberOfOfflineUsers());
+               pie2.pieValueProperty().bind(offlineusers);
+               
+                ObservableList<PieChart.Data> data = FXCollections.observableArrayList(pie,pie2);
+                //data.add(new PieChart.Data("Online",150));
+               // data.add(new PieChart.Data("Offline",55));
+                //data.add(new PieChart.Data("Busy",300));
+                //data.add(new PieChart.Data("Away",100));
+                chart.setData(data);
+                new Thread(new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        while (true) {                            
+                            Thread.sleep(1000);
+                            onlineusers.set(UserTableOperations.getInstance().numberOfOnlineUsers());
+                            offlineusers.set(UserTableOperations.getInstance().numberOfOfflineUsers());
+                            //System.out.println(female.getValue());
+    
+                        }
                         
+                        
+                        //return null;
+                    }
+                }).start();
+                
+                whiteanchorpane.getChildren().addAll(chart);
             }
+    
+            
         });
         statistics.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 whiteanchorpane.getChildren().clear();
                 PieChart chart = new PieChart();
-                ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
-                data.add(new PieChart.Data("Online",150));
-                data.add(new PieChart.Data("Offline",55));
-                data.add(new PieChart.Data("Busy",300));
-                data.add(new PieChart.Data("Away",100));
-                
+               /* Double noofusers = UserTableOperations.getInstance().numberOfOnlineUsers();
+                Double noofuserson = UserTableOperations.getInstance().numberOfOfflineUsers();
+                Double noofuserss = UserTableOperations.getInstance().numberOfFemaleUsers();
+                Double nodd = UserTableOperations.getInstance().numberOfMaleUsers();
+                Double nfd = UserTableOperations.getInstance().numberOfTotalUsers();
+                System.out.println("online" + noofusers + " offline" + noofuserson + "females "+ noofuserss + " males " + nodd + "total "+ nfd);
+*/              
+               PieChart.Data pie = new PieChart.Data("female",UserTableOperations.getInstance().numberOfFemaleUsers());
+               pie.pieValueProperty().bind(female);
+               PieChart.Data pie2 = new PieChart.Data("male",UserTableOperations.getInstance().numberOfMaleUsers());
+               pie2.pieValueProperty().bind(male);
+               
+                ObservableList<PieChart.Data> data = FXCollections.observableArrayList(pie,pie2);
+                //data.add(new PieChart.Data("Online",150));
+               // data.add(new PieChart.Data("Offline",55));
+                //data.add(new PieChart.Data("Busy",300));
+                //data.add(new PieChart.Data("Away",100));
                 chart.setData(data);
+                new Thread(new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        while (true) {                            
+                            Thread.sleep(1000);
+                            female.set(UserTableOperations.getInstance().numberOfFemaleUsers());
+                            male.set(UserTableOperations.getInstance().numberOfMaleUsers());
+                            System.out.println(female.getValue());
+    
+                        }
+                        
+                        
+                        //return null;
+                    }
+                }).start();
+                
                 whiteanchorpane.getChildren().addAll(chart);
             }
         });

@@ -64,15 +64,16 @@ public class DatabaseHandler
     }
     
     
-    public void insert(String query)
+    public boolean insert(String query)
     {
-    
+    boolean result=true;
         try {
             stmt.executeUpdate(query);
         } catch (SQLException ex) {
-            Logger.getLogger(DatabaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            result=false;
+            //Logger.getLogger(DatabaseHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+    return result;
     }
     
     

@@ -28,7 +28,7 @@ public class UserTableOperations {
         return userTableOperationsObj;
     }
 
-    public void insertUser(User user) {
+    public boolean insertUser(User user) {
         String query;
 
         query = "insert into " + DatabaseContract.UserTableContract.tableName + "("
@@ -53,7 +53,7 @@ public class UserTableOperations {
                 + "');";
 
         System.out.println(query);
-        DatabaseHandler.getInstance().insert(query);
+        return DatabaseHandler.getInstance().insert(query);
     }
 
     public boolean selectUser(String email, String password) {
@@ -99,19 +99,19 @@ public class UserTableOperations {
         return res;
     }
 
-    public boolean setUserOnlineStatus(String email) {
+    public boolean setUserOnlineStatus(String email,int flag) {
         String query;
 
         query = "update " + DatabaseContract.UserTableContract.tableName
-                + " set " + DatabaseContract.UserTableContract.online + "=" + '1'
-                + " where " + DatabaseContract.UserTableContract.email + "=" + "'" + email + "'";
+                + " set " + DatabaseContract.UserTableContract.online + "='" + flag
+                + "' where " + DatabaseContract.UserTableContract.email + "=" + "'" + email + "'";
         System.out.println(query);
         DatabaseHandler.getInstance().update(query);
 
         return true;
     }
 
-    public static boolean setUserStatus(String email, char character) {
+    public boolean setUserStatus(String email, char character) {
         String query;
 
         query = "update " + DatabaseContract.UserTableContract.tableName
@@ -123,7 +123,7 @@ public class UserTableOperations {
         return true;
     }
 
-    public static double numberOfOnlineUsers() {
+    public double numberOfOnlineUsers() {
 
         String query;
         ResultSet rs;
@@ -142,7 +142,7 @@ public class UserTableOperations {
         return counter;
     }
 
-    public static double numberOfOfflineUsers() {
+    public double numberOfOfflineUsers() {
 
         String query;
         ResultSet rs;
@@ -161,7 +161,7 @@ public class UserTableOperations {
         return counter;
     }
 
-    public static double numberOfMaleUsers() {
+    public double numberOfMaleUsers() {
 
         String query;
         ResultSet rs;
@@ -180,7 +180,7 @@ public class UserTableOperations {
         return counter;
     }
 
-    public static double numberOfFemaleUsers() {
+    public double numberOfFemaleUsers() {
 
         String query;
         ResultSet rs;
@@ -199,7 +199,7 @@ public class UserTableOperations {
         return counter;
     }
 
-    public static double numberOfTotalUsers() {
+    public double numberOfTotalUsers() {
 
         String query;
         ResultSet rs;

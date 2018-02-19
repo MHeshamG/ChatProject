@@ -39,6 +39,7 @@ public class MainControllerServer {
     private HashMap<String,GroupMsg> groupsHashMap;
     ServerImp obj;
     Registry reg;
+    boolean started=false;
     private MainControllerServer(){
         try {
             usersHashMap=new HashMap<>();
@@ -62,6 +63,7 @@ public class MainControllerServer {
         try{
         
         reg.rebind("service", obj);
+        started=true;
         }
         catch(RemoteException ex){ 
             ex.printStackTrace();
@@ -70,7 +72,7 @@ public class MainControllerServer {
      public void unbindService(){
         try{
          
-            
+        if(started)    
         reg.unbind("service");
         }
         catch(RemoteException ex){ 
@@ -79,8 +81,8 @@ public class MainControllerServer {
             Logger.getLogger(MainControllerServer.class.getName()).log(Level.SEVERE, null, ex);
         }    
     }
-    public void signup(User user){
-        UserTableOperations.getInstance().insertUser(user);
+    public boolean signup(User user){
+        return UserTableOperations.getInstance().insertUser(user);
         //System.out.println(user.getEmail());
     }
     
@@ -95,7 +97,7 @@ public class MainControllerServer {
     }
     
     public void setOnline(String email){
-        UserTableOperations.getInstance().setUserOnlineStatus(email);
+        UserTableOperations.getInstance().setUserOnlineStatus(email,1);
     }
     
     public ArrayList<User> getFriendsList(String email){
@@ -152,23 +154,34 @@ public class MainControllerServer {
         }
        
 }
-    public void addGroup(GroupMsg g){
+    public void addGroup(String email,GroupMsg g){
         groupsHashMap.put(g.getGroupName(), g);
         System.out.println(g.getGroupName());
         for (String object : g.getMembers()) {
-            System.out.println(object);
+            try {
+                if(!object.equals(email) && usersHashMap.get(object)!=null)
+                usersHashMap.get(object).receiveGroup(g);
+            } catch (RemoteException ex) {
+                Logger.getLogger(MainControllerServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
-    public void sendMessageToGroup(String groupName,Message msg){
+    public void sendMessageToGroup(String email,String groupName,Message msg){
         System.out.println(groupName);
         System.out.println(msg);
         for (String object : groupsHashMap.get(groupName).getMembers()) {
             try {
+                if(!object.equals(email) && usersHashMap.get(object)!=null)
                 usersHashMap.get(object).receiveMessageGroup(msg);
             } catch (RemoteException ex) {
                 Logger.getLogger(MainControllerServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    public void end(String email){
+        UserTableOperations.getInstance().setUserOnlineStatus(email,0);
+        usersHashMap.put(email,null);
     }
 }
