@@ -16,7 +16,7 @@
       <RadioButton fx:id="maleradiobutton" layoutX="99.0" layoutY="537.0" mnemonicParsing="false" text="Male" />
       <RadioButton fx:id="femaleradiobutton" layoutX="236.0" layoutY="534.0" mnemonicParsing="false" text="Female" />
       <ChoiceBox fx:id="country" layoutX="93.0" layoutY="597.0" prefHeight="25.0" prefWidth="267.0" />
-      <PasswordField layoutX="19.0" layoutY="375.0" prefHeight="48.0" prefWidth="420.0" promptText="Password" />
+      <PasswordField fx:id="password" layoutX="19.0" layoutY="375.0" prefHeight="48.0" prefWidth="420.0" promptText="Password" />
       <Button fx:id="back" layoutX="151.0" layoutY="732.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Back" textFill="#c8518a" />
     </children>
 </AnchorPane>

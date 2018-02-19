@@ -6,6 +6,7 @@
 package chatclientproject;
 
 import chatprojectcommon.ClientInterface;
+import chatprojectcommon.GroupMsg;
 import chatprojectcommon.Message;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -54,7 +55,13 @@ public class ClientImp extends UnicastRemoteObject implements ClientInterface{
 
     @Override
     public void receiveMessageGroup(Message msg) throws RemoteException {
-        MainControllerClient.getInstance().appenedMsgToChat(msg);
+        if(!MainControllerClient.getInstance().getToGroup().equals(""))
+            MainControllerClient.getInstance().appenedMsgToChat(msg);
+    }
+
+    @Override
+    public void receiveGroup(GroupMsg g) throws RemoteException {
+        MainControllerClient.getInstance().appenedGroup(g);
     }
     }
     

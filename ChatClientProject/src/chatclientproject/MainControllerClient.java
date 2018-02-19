@@ -19,6 +19,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
@@ -43,7 +44,7 @@ public class MainControllerClient {
     private ChatUiFXMLDocumentController chatUiController;
     private HashMap<String, ChatObj> chats; //represents the chats between individuals and groups
     private ClientImp cc;
-    private String toEmail;// who am i chatting
+    private String toEmail="";// who am i chatting
     private HashMap<String, GroupMsg> groupChats;
     private String toGroup="";
 
@@ -112,14 +113,15 @@ public class MainControllerClient {
     }
 
     public boolean signUp(User user) {
+        boolean result=false;
         try {
             // call signup method at server
             //System.out.println();
-            server.signup(user);
+           result= server.signup(user);
         } catch (RemoteException ex) {
             Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return result;
     }
 
     public void setOnline() {
@@ -290,13 +292,27 @@ public class MainControllerClient {
 
     }
 
+    
+    public void end(){
+        try {
+            server.end(email);
+            UnicastRemoteObject.unexportObject(cc, true);
+            System.exit(0);
+        } catch (RemoteException ex) {
+            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     //*****************************group part******************************************//
     // adds group to groups hashmap
     public void addGroup(String name) {
         groupChats.put(name, new GroupMsg(name));
+        groupChats.get(name).addToMembers(email);
     }
 
-   
+   public void appenedGroup(GroupMsg g){
+       chatUiController.appenedGroup(g);
+   }
 
     public GroupMsg getGroup(String name) {
         return groupChats.get(name);
@@ -304,7 +320,7 @@ public class MainControllerClient {
     public void sendGroupToServer(String name){
         try {
             System.out.println(name);
-            server.sendGroup(getGroup(name));
+            server.sendGroup(email,getGroup(name));
         } catch (RemoteException ex) {
             Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -319,7 +335,7 @@ public class MainControllerClient {
         System.out.println(toGroup);
         System.out.println(msg.getBody());
         try {
-            server.sendMessageToGroup(toGroup,msg);
+            server.sendMessageToGroup(email,toGroup,msg);
         } catch (RemoteException ex) {
             Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -328,7 +344,7 @@ public class MainControllerClient {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                new Alert(Alert.AlertType.INFORMATION,"Server Message "+Ann).showAndWait();
+                new Alert(Alert.AlertType.INFORMATION,"Server Message: "+Ann).showAndWait();
             }
         });
     }

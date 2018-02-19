@@ -6,11 +6,13 @@
 package chatclientproject;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 /**
  *
@@ -27,6 +29,12 @@ public class ChatClientProject extends Application {
         stage.setScene(scene);
         stage.initStyle(StageStyle.DECORATED);
         stage.show();
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                MainControllerClient.getInstance().end();
+            }
+        });
     }
 
     /**
