@@ -44,15 +44,15 @@ public class MainControllerClient {
     private ChatUiFXMLDocumentController chatUiController;
     private HashMap<String, ChatObj> chats; //represents the chats between individuals and groups
     private ClientImp cc;
-    private String toEmail="";// who am i chatting
+    private String toEmail = "";// who am i chatting
     private HashMap<String, GroupMsg> groupChats;
-    private String toGroup="";
+    private String toGroup = "";
 
     boolean file_result = false;
 
     private MainControllerClient() {
         chats = new HashMap<>();
-        groupChats=new HashMap<>();
+        groupChats = new HashMap<>();
         try {
             cc = new ClientImp();
         } catch (RemoteException ex) {
@@ -75,7 +75,7 @@ public class MainControllerClient {
 
     public void setToEmail(String toEmail) {
         this.toEmail = toEmail;
-        toGroup="";
+        toGroup = "";
     }
 
     public static MainControllerClient getInstance() {
@@ -91,9 +91,9 @@ public class MainControllerClient {
             Registry reg = LocateRegistry.getRegistry(2090);
             server = (ServerInterface) reg.lookup("service");
         } catch (RemoteException ex) {
-            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            showServerError();
         } catch (NotBoundException ex) {
-            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            showServerError();
         }
     }
 
@@ -107,19 +107,19 @@ public class MainControllerClient {
                 server.register(email, cc);
             }
         } catch (RemoteException ex) {
-            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            showServerError();
         }
         return loginResult;
     }
 
     public boolean signUp(User user) {
-        boolean result=false;
+        boolean result = false;
         try {
             // call signup method at server
             //System.out.println();
-           result= server.signup(user);
+            result = server.signup(user);
         } catch (RemoteException ex) {
-            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            showServerError();
         }
         return result;
     }
@@ -144,7 +144,7 @@ public class MainControllerClient {
             System.out.println(email);
             result = server.sendRequest(email, receiverEmail);
         } catch (RemoteException ex) {
-            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            showServerError();
         }
         return result;
     }
@@ -163,7 +163,7 @@ public class MainControllerClient {
             //demo method
             list = server.getFriendsList(email);
         } catch (RemoteException ex) {
-            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            showServerError();
         }
         return list;
     }
@@ -191,7 +191,7 @@ public class MainControllerClient {
             list = server.getRequestsList(email);
 //            System.out.println("request list: "+list.get(0).getName());
         } catch (RemoteException ex) {
-            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            showServerError();
         }
         return list;
     }
@@ -200,7 +200,7 @@ public class MainControllerClient {
         try {
             server.confirmRequest(recieverEmail, email);
         } catch (RemoteException ex) {
-            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            showServerError();
         }
     }
 
@@ -208,7 +208,7 @@ public class MainControllerClient {
         try {
             server.deletRequest(recieverEmail, email);
         } catch (RemoteException ex) {
-            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            showServerError();
         }
     }
 
@@ -218,7 +218,7 @@ public class MainControllerClient {
             server.sendMessage(msg);
             // chats.get(toEmail).appenedMessage(msg);
         } catch (RemoteException ex) {
-            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            showServerError();
         }
     }
 
@@ -235,7 +235,7 @@ public class MainControllerClient {
             System.out.println("x1" + msg.getFrom());
             appenedMsgToChat(msg);
         }
-        
+
     }
 
     public void appenedSentMessageToChatObj(Message msg) {
@@ -267,7 +267,7 @@ public class MainControllerClient {
             @Override
             public void run() {
                 FileInputStream input = null;
-                byte data[] = new byte[16*1024];
+                byte data[] = new byte[16 * 1024];
                 int Rbytes;
                 try {
 
@@ -292,17 +292,18 @@ public class MainControllerClient {
 
     }
 
-    
-    public void end(){
+    public void end() {
         try {
+            if(server!=null)
             server.end(email);
             UnicastRemoteObject.unexportObject(cc, true);
             System.exit(0);
         } catch (RemoteException ex) {
-            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            showServerError();
         }
-        
+
     }
+
     //*****************************group part******************************************//
     // adds group to groups hashmap
     public void addGroup(String name) {
@@ -310,42 +311,62 @@ public class MainControllerClient {
         groupChats.get(name).addToMembers(email);
     }
 
-   public void appenedGroup(GroupMsg g){
-       chatUiController.appenedGroup(g);
-   }
+    public void appenedGroup(GroupMsg g) {
+        chatUiController.appenedGroup(g);
+    }
 
     public GroupMsg getGroup(String name) {
         return groupChats.get(name);
     }
-    public void sendGroupToServer(String name){
+
+    public void sendGroupToServer(String name) {
         try {
             System.out.println(name);
-            server.sendGroup(email,getGroup(name));
+            server.sendGroup(email, getGroup(name));
         } catch (RemoteException ex) {
-            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            showServerError();
         }
     }
-    public void setToGroup(String g){
-        toGroup=g;
+
+    public void setToGroup(String g) {
+        toGroup = g;
     }
-    public String getToGroup(){
+
+    public String getToGroup() {
         return toGroup;
     }
-    public void sendMessageToGroup(Message msg){
+
+    public void sendMessageToGroup(Message msg) {
         System.out.println(toGroup);
         System.out.println(msg.getBody());
         try {
-            server.sendMessageToGroup(email,toGroup,msg);
+            server.sendMessageToGroup(email, toGroup, msg);
         } catch (RemoteException ex) {
-            Logger.getLogger(MainControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            showServerError();
         }
     }
-    public void receiveAnn(String Ann){
+
+    public void receiveAnn(String Ann) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                new Alert(Alert.AlertType.INFORMATION,"Server Message: "+Ann).showAndWait();
+                new Alert(Alert.AlertType.INFORMATION, "Server Message: " + Ann).showAndWait();
             }
         });
+    }
+
+    public ChatObj getChatObj() {
+        return chats.get(toEmail);
+    }
+
+    public void showServerError() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                new Alert(Alert.AlertType.ERROR, "Server Error").showAndWait();
+                System.exit(0);
+            }
+        });
+
     }
 }

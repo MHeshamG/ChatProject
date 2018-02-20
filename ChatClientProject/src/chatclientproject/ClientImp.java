@@ -15,6 +15,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import notificationmanager.NotificationHandler;
 
 /**
  *
@@ -45,6 +46,9 @@ public class ClientImp extends UnicastRemoteObject implements ClientInterface{
          try {
             FileOutputStream output=new FileOutputStream("src/received_files/"+fileName,true);
             output.write(data,offset,len);
+             System.out.println(len);
+            if(len<(16384))
+                NotificationHandler.getInstance().shOwNewMessageNotification("Recevied file "+from, 1);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ClientImp.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

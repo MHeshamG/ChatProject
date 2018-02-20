@@ -47,6 +47,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import notificationmanager.NotificationHandler;
 import util.ChatObj;
+import xmlchathisory.SaveChat;
 
 public class ChatUiFXMLDocumentController implements Initializable {
 
@@ -54,8 +55,7 @@ public class ChatUiFXMLDocumentController implements Initializable {
 
     @FXML
     private TextField addFriendText;
-    
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -93,8 +93,6 @@ public class ChatUiFXMLDocumentController implements Initializable {
         //test Notification
 //        NotificationHandler.getInstance().shOwNewMessageNotification("hello");
         vbox.setSpacing(8);
-        
-        
 
         /**
          * ***********************************************
@@ -120,6 +118,8 @@ public class ChatUiFXMLDocumentController implements Initializable {
     @FXML
     private ImageView send;
     @FXML
+    private ImageView save;
+    @FXML
     private ColorPicker colorpicker;
     @FXML
     private ChoiceBox fontchoice;
@@ -130,7 +130,6 @@ public class ChatUiFXMLDocumentController implements Initializable {
     @FXML
     private ChoiceBox fontsize;
 
-
     private String hex2 = "#ffffff";
     private String font = "Arial";
     private String fonttsize;
@@ -138,11 +137,11 @@ public class ChatUiFXMLDocumentController implements Initializable {
     public void setFriendsList() {
         ArrayList<User> list = MainControllerClient.getInstance().getFriendsList();
         int friendsLength = list.size();
-        
+
         friendsList = FXCollections.observableArrayList(list);
         contactList.setItems(friendsList);
         contactList.setCellFactory(new CustomListFactory());
-       
+
     }
 
     private void updateFriendsList() {
@@ -169,7 +168,7 @@ public class ChatUiFXMLDocumentController implements Initializable {
                 }
             }
         });
-        
+
     }
 
     public void setChattingFriendName(String name) {
@@ -181,19 +180,21 @@ public class ChatUiFXMLDocumentController implements Initializable {
         send.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if(!showDialog())return;
+                if (!showDialog()) {
+                    return;
+                }
                 String msg = msgText.getText();
                 if (!msg.equals("") && MainControllerClient.getInstance().getToGroup().equals("")) {
                     System.out.println(msg);
                     //create message
                     Message message = new Message(msg, MainControllerClient.getInstance().getEmail(),
-                            MainControllerClient.getInstance().getToEmail(), font, hex2, 0);
+                            MainControllerClient.getInstance().getToEmail(), font, hex2, fonttsize);
                     addMessage(message);
                     sendMsg(message);
                 } else {
                     if (!msg.equals("")) {
                         Message message = new Message(msg, MainControllerClient.getInstance().getEmail(),
-                                MainControllerClient.getInstance().getToGroup(), font, hex2, 0);
+                                MainControllerClient.getInstance().getToGroup(), font, hex2, fonttsize);
                         MainControllerClient.getInstance().sendMessageToGroup(message);
                         addMessage(message);
                     }
@@ -205,7 +206,7 @@ public class ChatUiFXMLDocumentController implements Initializable {
             public void handle(Event t) {
                 Color color = colorpicker.getValue();
                 hex2 = "#" + Integer.toHexString(color.hashCode());
-                msgText.setStyle("-fx-background-radius:15px;-fx-font-family:" + font + ";"+"-fx-text-fill:"+hex2+";-fx-font-size:"+fonttsize+";");
+                msgText.setStyle("-fx-background-radius:15px;-fx-font-family:" + font + ";" + "-fx-text-fill:" + hex2 + ";-fx-font-size:" + fonttsize + ";");
             }
         });
 
@@ -217,34 +218,55 @@ public class ChatUiFXMLDocumentController implements Initializable {
             public void handle(Event event) {
                 font = (String) fontchoice.getSelectionModel().getSelectedItem();
                 System.out.println(font);
-                msgText.setStyle("-fx-background-radius:15px; -fx-font-family:" + font + ";"+"-fx-text-fill:"+hex2+";-fx-font-size:"+fonttsize+";");
+                msgText.setStyle("-fx-background-radius:15px; -fx-font-family:" + font + ";" + "-fx-text-fill:" + hex2 + ";-fx-font-size:" + fonttsize + ";");
             }
         });
 
-         List<java.lang.String> fontsizee = new ArrayList<>();
-            fontsizee.add("20");
-            fontsizee.add("21");
-            fontsizee.add("22");
-            fontsizee.add("23");
-            fontsize.getItems().addAll(fontsizee);
+        List<java.lang.String> fontsizee = new ArrayList<>();
+        fontsizee.add("20");
+        fontsizee.add("21");
+        fontsizee.add("22");
+        fontsizee.add("23");
+        fontsize.getItems().addAll(fontsizee);
 
         fontsize.setOnAction(new EventHandler() {
             @Override
             public void handle(Event event) {
-                 fonttsize = (String) fontsize.getSelectionModel().getSelectedItem();
-                 System.out.println(fonttsize);
-                msgText.setStyle("-fx-background-radius:15px; -fx-font-family:" + font + ";"+"-fx-text-fill:"+hex2+";-fx-font-size:"+fonttsize+";");
+                fonttsize = (String) fontsize.getSelectionModel().getSelectedItem();
+                System.out.println(fonttsize);
+                msgText.setStyle("-fx-background-radius:15px; -fx-font-family:" + font + ";" + "-fx-text-fill:" + hex2 + ";-fx-font-size:" + fonttsize + ";");
             }
-        });    
-        
+        });
+
         fileButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 File file = openFileChooser();
-                if(!showDialog())return;
+                if (!showDialog()) {
+                    return;
+                }
                 if (file != null) {
                     MainControllerClient.getInstance().sendFile(new Message(null, MainControllerClient.getInstance().getEmail(),
-                            MainControllerClient.getInstance().getToEmail(), null, null, Integer.parseInt(fonttsize)), file);
+                            MainControllerClient.getInstance().getToEmail(), null, null, fonttsize), file);
+                }
+            }
+        });
+
+        save.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage = (Stage) addFriendText.getScene().getWindow();
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("save");
+
+                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.xml"));
+
+                File createdfile = fileChooser.showSaveDialog(stage);
+                if (createdfile != null) {
+                    SaveChat saveCh = new SaveChat();
+
+                    saveCh.saveXMLFile(createdfile, MainControllerClient.getInstance().getChatObj().getMessages(),
+                            new User("", "", "", MainControllerClient.getInstance().getToEmail(), 0, false));
                 }
             }
         });
@@ -264,7 +286,7 @@ public class ChatUiFXMLDocumentController implements Initializable {
         box.setAlignment(Pos.BASELINE_RIGHT);
         Text txt = new Text();
         txt.setText(msg.getBody());
-        txt.setStyle("-fx-fill:" + hex2 + ";-fx-font-family:" + font + ";-fx-font-size:"+msg.getFontSize()+";");
+        txt.setStyle("-fx-fill:" + hex2 + ";-fx-font-family:" + font + ";-fx-font-size:" + String.valueOf(msg.getFontSize()) + ";");
         txt.getStyleClass().add("textWhite");
         TextFlow txtFlow = new TextFlow(txt);
         txtFlow.getStyleClass().add("textFlowMessageFlipped");
@@ -280,7 +302,7 @@ public class ChatUiFXMLDocumentController implements Initializable {
         box.setAlignment(Pos.BASELINE_LEFT);
         Text txt = new Text();
         txt.setText(msg.getBody());
-        txt.setStyle("-fx-fill:" + hex2 + ";-fx-font-family:" + font + ";-fx-font-size:"+msg.getFontSize()+";");
+        txt.setStyle("-fx-fill:" + hex2 + ";-fx-font-family:" + font + ";-fx-font-size:" + msg.getFontSize() + ";");
         TextFlow txtFlow = new TextFlow(txt);
         txtFlow.getStyleClass().add("textFlowMessage");
         box.getChildren().add(txtFlow);
@@ -309,14 +331,14 @@ public class ChatUiFXMLDocumentController implements Initializable {
         vbox.getChildren().clear();
     }
 
-    public boolean showDialog(){
-        if(MainControllerClient.getInstance().getToEmail().equals("") && MainControllerClient.getInstance().getToGroup().equals("")){
-                    new Alert(Alert.AlertType.ERROR,"Choose friend first").show();
-                    return false;
-                }
+    public boolean showDialog() {
+        if (MainControllerClient.getInstance().getToEmail().equals("") && MainControllerClient.getInstance().getToGroup().equals("")) {
+            new Alert(Alert.AlertType.ERROR, "Choose friend first").show();
+            return false;
+        }
         return true;
     }
-    
+
     /**
      * ***********************************************
      */
@@ -331,6 +353,7 @@ public class ChatUiFXMLDocumentController implements Initializable {
     private ListView contactListCreateGroup;
     @FXML
     private ObservableList<GroupMsg> groupList;
+    private String groupNameX;
 
     public void setGroupTextFields() {
         GroupNameTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -339,9 +362,10 @@ public class ChatUiFXMLDocumentController implements Initializable {
                 String groupName = GroupNameTextField.getText();
                 if (event.getCode() == KeyCode.ENTER && !groupName.equals("")) {
                     // MainControllerClient.getInstance().sendRequest(email);
+                    groupNameX=LocalTime.now() + ";" + groupName;
                     System.out.println(LocalTime.now() + ";" + groupName);
-                    GroupMsg g = new GroupMsg(groupName);
-                    MainControllerClient.getInstance().addGroup(groupName);
+                    GroupMsg g = new GroupMsg(groupNameX);
+                    MainControllerClient.getInstance().addGroup(groupNameX);
                     if (groupList == null) {
                         groupList = FXCollections.observableArrayList();
                         contactListCreateGroup.setCellFactory(groupCallback);
@@ -353,13 +377,29 @@ public class ChatUiFXMLDocumentController implements Initializable {
         AddMemberTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
+                boolean state = true;
                 String groupName = GroupNameTextField.getText();
                 String memberEmail = AddMemberTextField.getText();
                 if (event.getCode() == KeyCode.ENTER && !memberEmail.equals("")) {
                     // MainControllerClient.getInstance().sendRequest(email);
                     //System.out.println(memberEmail);
-                    MainControllerClient.getInstance().getGroup(groupName).addToMembers(memberEmail);
-                    new Alert(Alert.AlertType.INFORMATION, memberEmail + " added to " + groupName).show();
+                    for (int i = 0; i < friendsList.size(); i++) {
+                        if (friendsList.get(i).getEmail().equals(memberEmail)) {
+                            state = false;
+                            break;
+                        }
+                    }
+                    if (!state) {
+                        if (MainControllerClient.getInstance().getGroup(groupNameX) != null) {
+                            MainControllerClient.getInstance().getGroup(groupNameX).addToMembers(memberEmail);
+                            new Alert(Alert.AlertType.INFORMATION, memberEmail + " added to " + groupName).show();
+                        } else {
+                            new Alert(Alert.AlertType.ERROR,"group has not been added please enter group name and press enter").show();
+                        }
+                    } else {
+                        new Alert(Alert.AlertType.ERROR, memberEmail + " Not a friend ").show();
+                    }
+
                     AddMemberTextField.setText("");
                 }
             }
@@ -369,16 +409,19 @@ public class ChatUiFXMLDocumentController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 String groupName = GroupNameTextField.getText();
-                MainControllerClient.getInstance().sendGroupToServer(groupName);
+                MainControllerClient.getInstance().sendGroupToServer(groupNameX);
                 new Alert(Alert.AlertType.INFORMATION, "group created").show();
                 GroupNameTextField.setText("");
                 contactListCreateGroup.setItems(groupList);
+                groupNameX="";
             }
         });
     }
-    public void appenedGroup(GroupMsg g){
-        if(groupList==null)
-            groupList=FXCollections.observableArrayList();
+
+    public void appenedGroup(GroupMsg g) {
+        if (groupList == null) {
+            groupList = FXCollections.observableArrayList();
+        }
         groupList.add(g);
         contactListCreateGroup.setItems(groupList);
         contactListCreateGroup.setCellFactory(groupCallback);
@@ -408,35 +451,33 @@ public class ChatUiFXMLDocumentController implements Initializable {
     /**
      * *********************************************
      */
-    
-    
-    Callback<ListView<GroupMsg>, ListCell<GroupMsg>> groupCallback=new Callback<ListView<GroupMsg>, ListCell<GroupMsg>>() {
-                            @Override
-                            public ListCell<GroupMsg> call(ListView<GroupMsg> param) {
-                                return new ListCell<GroupMsg>() {
-                                    @Override
-                                    
-                                    protected void updateItem(GroupMsg item, boolean empty) {
-                                        super.updateItem(item, empty); //To change body of generated methods, choose Tools | Templates.
-                                        if (item != null && !empty) {
-                                            Text text = new Text(item.getGroupName());
-                                            text.setStyle("-fx-fill:#ffffff;");
-                                            text.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                                                @Override
-                                                public void handle(MouseEvent event) {
-                                                    System.out.println("group pressed");
-                                                    MainControllerClient.getInstance().setToGroup(item.getGroupName());
-                                                    clearVbox();
-                                                    setChattingFriendName(item.getGroupName());
-                                                }
-                                            });
-                                            setGraphic(text);
-                                        } else {
-                                            setGraphic(null);
-                                        }
-                                    }
-                                };
-                            }
+    Callback<ListView<GroupMsg>, ListCell<GroupMsg>> groupCallback = new Callback<ListView<GroupMsg>, ListCell<GroupMsg>>() {
+        @Override
+        public ListCell<GroupMsg> call(ListView<GroupMsg> param) {
+            return new ListCell<GroupMsg>() {
+                @Override
 
-                        };
+                protected void updateItem(GroupMsg item, boolean empty) {
+                    super.updateItem(item, empty); //To change body of generated methods, choose Tools | Templates.
+                    if (item != null && !empty) {
+                        Text text = new Text(item.getGroupName().split(";")[1]);
+                        text.setStyle("-fx-fill:#ffffff;");
+                        text.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                System.out.println("group pressed");
+                                MainControllerClient.getInstance().setToGroup(item.getGroupName());
+                                clearVbox();
+                                setChattingFriendName("Talking to:"+item.getGroupName().split(";")[1]);
+                            }
+                        });
+                        setGraphic(text);
+                    } else {
+                        setGraphic(null);
+                    }
+                }
+            };
+        }
+
+    };
 }

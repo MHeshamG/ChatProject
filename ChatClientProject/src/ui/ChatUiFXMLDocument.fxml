@@ -157,12 +157,17 @@
                         </ImageInput>
                     </effect>
                 </ChoiceBox>
+                 <ImageView fx:id="save" fitHeight="30.0" fitWidth="30.0" layoutX="165.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="/imgs/download-button (1).png" />
+                    </image>
+                </ImageView>
                 <ImageView fx:id="send" fitHeight="30.0" fitWidth="30.0" layoutX="685.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="/imgs/send.png" />
                     </image>
                 </ImageView>
-                <TextField fx:id="msgText" layoutX="170.0" layoutY="5.0" prefHeight="40.0" prefWidth="460.0" promptText="Type Your Message.." style="-fx-background-radius: 15;" styleClass="msg-text-field">
+                <TextField fx:id="msgText" layoutX="215.0" layoutY="5.0" prefHeight="40.0" prefWidth="415.0" promptText="Type Your Message.." style="-fx-background-radius: 15;" styleClass="msg-text-field">
                     <font>
                         <Font size="17.0" />
                     </font>
