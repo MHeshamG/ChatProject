@@ -61,9 +61,10 @@ public class MainControllerServer {
     
     public void bindService(){
         try{
-        
-        reg.rebind("service", obj);
-        started=true;
+        if(!started){
+            reg.rebind("service", obj);
+            started=true;   
+        }
         }
         catch(RemoteException ex){ 
             ex.printStackTrace();
@@ -72,8 +73,10 @@ public class MainControllerServer {
      public void unbindService(){
         try{
          
-        if(started)    
-        reg.unbind("service");
+        if(started){    
+            reg.unbind("service");
+            started=false;
+        }
         }
         catch(RemoteException ex){ 
             ex.printStackTrace();
@@ -155,6 +158,7 @@ public class MainControllerServer {
        
 }
     public void addGroup(String email,GroupMsg g){
+        System.out.println("xxxxx:"+g.getGroupName());
         groupsHashMap.put(g.getGroupName(), g);
         System.out.println(g.getGroupName());
         for (String object : g.getMembers()) {

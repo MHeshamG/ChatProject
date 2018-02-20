@@ -14,6 +14,7 @@ public class DatabaseHandler
     
     private static DatabaseHandler databaseHandlerObj;
     private Statement stmt;
+    private ResultSet selectedData=null;
    
     private DatabaseHandler(){
     
@@ -110,7 +111,7 @@ public class DatabaseHandler
       
          public  ResultSet  select(String query) 
     {
-          ResultSet selectedData=null;
+          
        
           try {
               if(stmt==null)
