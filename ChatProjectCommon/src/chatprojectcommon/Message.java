@@ -17,8 +17,8 @@ public class Message implements Serializable{
     private String to;
     private String font;
     private String color;
-    private int fontSize; 
-    public Message(String body, String from, String to, String font, String color , int fontSize) {
+    private String fontSize; 
+    public Message(String body, String from, String to, String font, String color , String fontSize) {
         this.body = body;
         this.from = from;
         this.to = to;
@@ -27,11 +27,11 @@ public class Message implements Serializable{
         this.fontSize=fontSize;
     }
 
-    public int getFontSize() {
+    public String getFontSize() {
         return fontSize;
     }
 
-    public void setFontSize(int fontSize) {
+    public void setFontSize(String fontSize) {
         this.fontSize = fontSize;
     }
 
