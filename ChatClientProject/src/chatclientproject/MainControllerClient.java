@@ -47,6 +47,7 @@ public class MainControllerClient {
     private String toEmail = "";// who am i chatting
     private HashMap<String, GroupMsg> groupChats;
     private String toGroup = "";
+    private String Ip="";
 
     boolean file_result = false;
 
@@ -60,6 +61,10 @@ public class MainControllerClient {
         }
     }
 
+    public void setIp(String ip){
+        Ip=ip;
+    }
+    
     public String getEmail() {
         return email;
     }
@@ -88,7 +93,7 @@ public class MainControllerClient {
 
     public void connectToServer() {
         try {
-            Registry reg = LocateRegistry.getRegistry(2090);
+            Registry reg = LocateRegistry.getRegistry(Ip,2090);
             server = (ServerInterface) reg.lookup("service");
         } catch (RemoteException ex) {
             showServerError();
