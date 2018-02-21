@@ -52,8 +52,8 @@ public class DatabaseHandler
         }
     catch(SQLException e ){
           
-        e.printStackTrace();
-    
+        System.out.println("Database server error");
+        System.exit(0);
     }
         
     catch(Exception ex){

@@ -19,6 +19,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.util.*;
+import javafx.event.EventHandler;
+import javafx.stage.WindowEvent;
 
 /**
  *
@@ -34,6 +36,12 @@ public class ChatServerProject extends Application {
 
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                System.exit(0);
+            }
+        });
     }
 
     /**
