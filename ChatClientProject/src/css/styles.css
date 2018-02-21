@@ -9,8 +9,8 @@
 }*/
 .list-view .list-cell{
     -fx-background-color:#253241;
-    /*-fx-border-width: 0 0 1 0;
-    -fx-border-color: #ffffff;*/
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #4c6175;
     -fx-text-fill: #ffffff;
 }
 
