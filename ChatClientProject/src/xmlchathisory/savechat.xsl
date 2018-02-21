@@ -146,10 +146,10 @@
 
                     .self .avatar:after {
                     content: "";
-                    
+                    position:relative;
                     display: inline-block;
                     bottom: 19px;
-                   
+                   right:0px;
                     width: 0px;
                     height: 0px;
                     border: 5px solid #fff;
@@ -247,7 +247,7 @@
                             <xsl:when test="from = $sender">
                                 <li class="self" >
                                     <div class="avatar" >
-                                        <p style="color:white;"><xsl:value-of select="$sender"/></p>
+                                        <p style="color:white; float:right;"><xsl:value-of select="$sender"/></p>
                                     </div>
                                     <div class="msg" >
                                         <p style="
@@ -255,6 +255,7 @@
                                     font-size: 30px;
                                     font-family:'Lato', sans-serif ;
                                     font-weight: strong;
+                                    float:right;
                                     ">
                                             <xsl:value-of select="body"/>
                                         </p>
