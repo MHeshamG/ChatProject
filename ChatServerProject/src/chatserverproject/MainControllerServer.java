@@ -90,6 +90,8 @@ public class MainControllerServer {
     }
     
     public boolean login(String email,String password){
+        if(usersHashMap.get(email)!=null)
+            return false;
        return UserTableOperations.getInstance().selectUser(email,password);
     }
     
