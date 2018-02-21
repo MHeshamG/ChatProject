@@ -77,7 +77,7 @@ public class SignInFXMLDocumentController implements Initializable {
                 MainControllerClient.getInstance().setOnline();
                 Stage stage = (Stage) signUpButton.getScene().getWindow();
                 Parent root = FXMLLoader.load(getClass().getResource("ChatUiFXMLDocument.fxml"));
-                Scene scene = new Scene(root);
+                Scene scene = new Scene(root,1250,800);
                 stage.setScene(scene);
                 
             } catch (IOException ex) {

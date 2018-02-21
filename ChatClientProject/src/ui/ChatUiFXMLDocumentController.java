@@ -255,6 +255,10 @@ public class ChatUiFXMLDocumentController implements Initializable {
         save.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                if ( MainControllerClient.getInstance().getChatObj()==null) {
+                    new Alert(Alert.AlertType.ERROR,"No chat to save").show();
+                    return;
+                }
                 stage = (Stage) addFriendText.getScene().getWindow();
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("save");
@@ -302,7 +306,7 @@ public class ChatUiFXMLDocumentController implements Initializable {
         box.setAlignment(Pos.BASELINE_LEFT);
         Text txt = new Text();
         txt.setText(msg.getBody());
-        txt.setStyle("-fx-fill:" + hex2 + ";-fx-font-family:" + font + ";-fx-font-size:" + msg.getFontSize() + ";");
+        txt.setStyle("-fx-fill:" + msg.getColor() + ";-fx-font-family:" + msg.getFont() + ";-fx-font-size:" + msg.getFontSize() + ";");
         TextFlow txtFlow = new TextFlow(txt);
         txtFlow.getStyleClass().add("textFlowMessage");
         box.getChildren().add(txtFlow);

@@ -139,7 +139,7 @@ public class SignUpFXMLDocumentController implements Initializable {
         try {
             Stage stage = (Stage) name.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("/ui/ChatUiFXMLDocument.fxml"));
-            Scene scene = new Scene(root, 1500, 800);
+            Scene scene = new Scene(root, 1250, 800);
             stage.setScene(scene);
         } catch (IOException ex) {
             Logger.getLogger(SignUpFXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
